@@ -1,0 +1,64 @@
+@mixin button($name, $height: false, $border: true, $border-color: white, $color: white, $bg-color: white, $gradient: false, $top: white, $bottom: white) {
+  #{$name} {
+    @if $height == false{
+      line-height: 1em;
+    } @else if $height {
+      height: nth($height, 1) + px;
+      line-height: nth($height, 1) + px;
+    }
+    @if $gradient == true{
+      background: $top;
+      background-image: -webkit-linear-gradient(transparent 0%, $bottom 100%);
+      background-image: linear-gradient(transparent 0%, $bottom 100%);
+      transition: background-color 150ms;
+      @if $border == true{
+        border: 1px solid $border-color;
+      } @else if $border == false{
+        border: 0;
+      }
+      &:hover {
+        background: lighten($top, 2%);
+        background-image: -webkit-linear-gradient(transparent 0%, lighten($bottom, 2%));
+        background-image: linear-gradient(transparent 0%, lighten($bottom, 2%));
+        color: $color;
+      }
+      &:active {
+        background: $bottom;
+        background-image: -webkit-linear-gradient(transparent 0%, $top 100%);
+        background-image: linear-gradient(transparent 0%, $top 100%);
+      }
+    } @else {
+      background-color: $bg-color;
+      transition: background-color 150ms;
+      @if $border == true{
+        border: 1px solid $border-color;
+      } @else if $border == false{
+        border: 0;
+      }
+      &:hover {
+        background-color: lighten($bg-color, 4%);
+        color: $color;
+      }
+      &:active {
+        background-color: darken($bg-color, 2%);
+      }
+    }
+    margin: 0;
+    padding: 0 15px;
+    cursor: pointer;
+    color: $color;
+    border-radius: 2px;
+    font-weight: 700;
+    display: inline-block;
+    vertical-align: middle;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    @content;
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+}

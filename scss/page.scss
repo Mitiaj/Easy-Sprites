@@ -1,4 +1,5 @@
 @import "spriting";
+@import "buttons";
 
 body {
   width: 100%;
@@ -15,4 +16,8 @@ $social-icons: facebook, rss, skype, yahoo, gplus;
     margin: 10px;
     @include sprites($item);
   }
+}
+
+@include button('.class-name') {
+  border-radius: 4px;
 }
