@@ -1,9 +1,9 @@
-SCSS-Spriting
+SCSS-Snippets
 =============
 
-Spriting plugin for SASS/Compass
+SCSS snippets for SASS/Compass
 
-##Possible @mixin options
+##Spriting @mixin options
 
  ```scss
  $icons-map: icons //default
