@@ -1,11 +1,11 @@
-SCSS-Snippets alpha_1
+SCSS-Snippets v0.1
 =====================
 
 SCSS snippets for SASS/Compass
 
-###Spriting mixin
+###Config.rb
 
-While using this snippet to generate sprite images some options should be aplied to your **config.rb** file (change path to match your project).
+While using this snippet to generate sprite images configuration options should be aplied to your **config.rb** file (change path's to match your project).
 
  ```ruby
  css_dir = "/Content/Styles"
@@ -17,43 +17,36 @@ While using this snippet to generate sprite images some options should be aplied
  chunky_png_options = :best_compression
  ```
 
-Here is a mixin options which you can use while generating sprite images. ($center)
+###Spriting mixin setup
+
+Here is a mixin options which you can use while generating sprite images.
+Copy Paste **_spriting.scss** to your project directory and **@import** it to your main **.scss** file.
+Create two folders in your choosen scss images folder. For example I've created **icons** folder for standard images and **icons@x2** for x2 bigger retina images.
+**Make sure the retina images are divisible by 4 or at least 2**. If they are not, this can lead to background position shifting.
+
+In your main **.scss** file create a class with options to generate sprite images. you don't need to create a separate class, just add @include to your file and use $class option.
 
  ```scss
- $icons-map: icons //default directory
- $size: true //default icon size will be applied for element
- $retina: true //by default retina support is set to true
- $center: false //by default set to false
- $center-y: false //by default set to false
- $center-x: false //by default set to false
+ @include sprites($class: '.classname', $name: image-name)
  ```
 
-###Buttons mixin options
-
-Here is a button mixin which allow you in easy way to create any type of buttons for your projects.
+####Available options
+Default folder name is icons but you can change it or add more folders in **_spriting.scss** file
+ ```scss
+ $icons-map: icons
+ ```
+By default I've enabled element size to true which set's width and height to actual source image size if you don't need it for any reason you can set it to false.
+ ```scss
+ $size: true //bool
+ ```
+If you don't need to generate sprites for retina screens don't create icons@x2 folder and set it to false.
 
  ```scss
- $name //must be applied
- $border: true //optional true/false
- $border-color: blue //optional you can choose whatever color you like
- $color: white //optional button text color
- $bg-color: white //optional add any color
- $gradient: false //optional true/false
- $top-color: white //optional this option available only if gradient set to true
- $bottom-color: white //optional this option available only if gradient set to true
- @content //directive means that you can add custom properties to our mixin see example below:
+ $retina: true //bool
  ```
-
-To create button just add this include into your scss file and add any of listed options. Always add class or element name as a string **'.class-name'**.
-
+By default centering is set to false if you need to center your image to x or y axis use this options.
  ```scss
- @include button('.class-name'){
-    border-radius: 4px;
- }
+ $center: false //bool
+ $center-y: false //bool
+ $center-x: false //bool
  ```
-
- ```scss
- @include button('btn-testing', $border: false, $bg-color: #ff0099);
- ```
-
-To use these snippets COMPASS/SASS should be installed on your local computer.
