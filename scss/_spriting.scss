@@ -1,4 +1,8 @@
-$icons-map: 'icons' !default;
+@function icons-map($icons-folder) {
+  @return ($icons-folder)
+}
+
+$icons-map: icons-map(icons) !default;
 
 $map: sprite-map("#{$icons-map}/*.png", $layout: smart);
 $map-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
@@ -18,6 +22,7 @@ $half: 50%;
   }
 }
 
+//TODO implement option to set comma-separated images to true/false
 //TODO add hover and active pseudo class support
 @mixin sprites($class, $name, $icons-map: icons, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
   #{$class} {
@@ -52,14 +57,14 @@ $half: 50%;
       left: $half;
       margin-left: -($image-width / 2);
     }
-    @if $retina == true{
+    @if $retina == false{
+    } @else if $retina == true{
       @extend %comma-separated-retina;
       @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
         $position: sprite-position($map-retina, $name);
         background-position: round(nth($position, 1) / 2) round(nth($position, 2) / 2);
         background-size: (ceil(image-width(sprite-path($map-retina)) / 2) auto);
       }
-    } @else if $retina == false{
     }
   }
 }
