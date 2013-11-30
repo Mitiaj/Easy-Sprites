@@ -4,7 +4,7 @@ SCSS-Helpers v0.1
 SCSS helpers for SASS/Compass
 
 ###Config.rb
-While using this snippet to generate sprite images configuration options should be aplied to your **config.rb** file (change path's to match your project).
+While using this helper to generate sprite images configuration options should be aplied to your **config.rb** file (change path's to match your project).
  ```ruby
  css_dir = "/Content/Styles"
  sass_dir = "scss"
