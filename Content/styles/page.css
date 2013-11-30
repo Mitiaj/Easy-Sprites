@@ -106,9 +106,9 @@ body {
 .test:after {
   content: "";
   overflow: hidden;
-  background-position: 0 -40px;
-  width: 32px;
-  height: 32px;
+  background-position: 0 0;
+  width: 16px;
+  height: 16px;
 }
 
 .class-name {

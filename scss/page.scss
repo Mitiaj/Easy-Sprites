@@ -7,8 +7,6 @@ body {
   height: 100%;
 }
 
-//$icons-map: 'states';
-
 $social-icons: facebook, rss, skype, yahoo, gplus;
 @each $item in $social-icons {
   @include sprites($class: '.social-#{$item}', $name: $item) {
@@ -21,7 +19,7 @@ $social-icons: facebook, rss, skype, yahoo, gplus;
 }
 
 .test {
-  @include sprites($class: '&:after', $name: gplus, $retina: false) {
+  @include sprites($class: '&:after', $name: rss, $retina: false) {
     content: "";
   }
 }
