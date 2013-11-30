@@ -20,7 +20,7 @@ While using this snippet to generate sprite images configuration options should 
 ###Spriting mixin setup
 
 Here is a mixin options which you can use while generating sprite images.
-Copy Paste **_spriting.scss** to your project directory and **@import** it to your main **.scss** file.
+Copy **_spriting.scss** to your project directory and **@import** it to your main **.scss** file.
 Create two folders in your choosen scss images folder. For example I've created **icons** folder for standard images and **icons@x2** for x2 bigger retina images.
 **Make sure the retina images are divisible by 4 or at least 2**. If they are not, this can lead to background position shifting.
 
