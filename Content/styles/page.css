@@ -1,8 +1,9 @@
-.sprite-icons, .social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus {
+.social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus, .test:after {
   background: url('images/icons-s97758c514d.png') no-repeat;
 }
+
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .sprite-icons, .social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus {
+  .social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus {
     background: url('images/icons@x2-s100a20fc2c.png') no-repeat;
   }
 }
@@ -18,7 +19,6 @@ body {
   vertical-align: middle;
   background-color: #f7f7f7;
   margin: 10px;
-  content: "";
   overflow: hidden;
   background-position: 0 -104px;
   width: 32px;
@@ -37,7 +37,6 @@ body {
   vertical-align: middle;
   background-color: #f7f7f7;
   margin: 10px;
-  content: "";
   overflow: hidden;
   background-position: 0 0;
   width: 16px;
@@ -56,7 +55,6 @@ body {
   vertical-align: middle;
   background-color: #f7f7f7;
   margin: 10px;
-  content: "";
   overflow: hidden;
   background-position: 0 -72px;
   width: 32px;
@@ -75,7 +73,6 @@ body {
   vertical-align: middle;
   background-color: #f7f7f7;
   margin: 10px;
-  content: "";
   overflow: hidden;
   background-position: 0 -16px;
   width: 24px;
@@ -94,7 +91,6 @@ body {
   vertical-align: middle;
   background-color: #f7f7f7;
   margin: 10px;
-  content: "";
   overflow: hidden;
   background-position: 0 -40px;
   width: 32px;
@@ -105,6 +101,14 @@ body {
     background-position: 0 -40px;
     background-size: 32px auto;
   }
+}
+
+.test:after {
+  content: "";
+  overflow: hidden;
+  background-position: 0 -40px;
+  width: 32px;
+  height: 32px;
 }
 
 .class-name {

@@ -1,13 +1,28 @@
-SCSS-Snippets
-=============
+SCSS-Snippets alpha_1
+=====================
 
 SCSS snippets for SASS/Compass
 
-###Spriting mixin options
+###Spriting mixin
+
+While using this snippet to generate sprite images some options should be aplied to your **config.rb** file (change path to match your project).
+
+ ```ruby
+ css_dir = "/Content/Styles"
+ sass_dir = "scss"
+ images_dir = "/Content/Styles/images"
+ sprite_load_path = "scss/images"
+ relative_assets = true
+ sprite_engine = :chunky_png
+ chunky_png_options = :best_compression
+ ```
+
+Here is a mixin options which you can use while generating sprite images. ($center)
 
  ```scss
- $icons-map: icons //default
- $size: true //default
+ $icons-map: icons //default directory
+ $size: true //default icon size will be applied for element
+ $retina: true //by default retina support is set to true
  $center: false //by default set to false
  $center-y: false //by default set to false
  $center-x: false //by default set to false
@@ -40,3 +55,5 @@ To create button just add this include into your scss file and add any of listed
  ```scss
  @include button('btn-testing', $border: false, $bg-color: #ff0099);
  ```
+
+To use these snippets COMPASS/SASS should be installed on your local computer.

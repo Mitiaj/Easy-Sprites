@@ -16,5 +16,5 @@ output_style = :expanded
 line_comments = false
 
 on_sprite_generated do |sprite_data|
-  sprite_data.metadata['Caption'] = "This Image is created by Paul G. &copy; 2013"
+  sprite_data.metadata['Caption'] = "Copyright &copy; 2013"
 end

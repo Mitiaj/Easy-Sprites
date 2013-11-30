@@ -1,11 +1,17 @@
-$icons-map: 'icons';
-@each $item in $icons-map {
-  //noinspection ALL
-  $map: sprite-map("#{$item}/*.png", $layout: smart);
-  //noinspection ALL
-  $map-retina: sprite-map("#{$item}@x2/*.png", $layout: smart);
-  .sprite-#{$item} {
+$icons-map: 'icons' !default;
+
+$map: sprite-map("#{$icons-map}/*.png", $layout: smart);
+$map-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+$half: 50%;
+
+%comma-separated {
+  @each $item in $icons-map {
     background: $map no-repeat;
+  }
+}
+
+%comma-separated-retina {
+  @each $item in $icons-map {
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
       background: $map-retina no-repeat;
     }
@@ -13,45 +19,47 @@ $icons-map: 'icons';
 }
 
 //TODO add hover and active pseudo class support
-//noinspection ALL
-@mixin sprites($name, $icons-map: icons, $size: true, $center: false, $center-y: false, $center-x: false) {
-  $map: sprite-map("#{$icons-map}/*.png", $layout: smart);
-  $map-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
-  $image-width: image-width(sprite-file($map, $name));
-  $image-height: image-height(sprite-file($map, $name));
-  $half: 50%;
-  content: "";
-  overflow: hidden;
-  background-position: sprite-position($map, $name);
-  @extend .sprite-#{$icons-map};
-  @if $size == false{
-  } @else if $size == true{
-    width: $image-width;
-    height: $image-height;
-  }
-  @if $center == false{
-  } @else if $center == true{
-    position: absolute;
-    top: $half;
-    left: $half;
-    margin-top: -($image-height / 2);
-    margin-left: -($image-width / 2);
-  }
-  @if $center-y == false{
-  } @else if $center-y == true{
-    position: absolute;
-    top: $half;
-    margin-top: -($image-height / 2);
-  }
-  @if $center-x == false{
-  } @else if $center-x == true{
-    position: absolute;
-    left: $half;
-    margin-left: -($image-width / 2);
-  }
-  @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
-    $position: sprite-position($map-retina, $name);
-    background-position: round(nth($position, 1) / 2) round(nth($position, 2) / 2);
-    background-size: (ceil(image-width(sprite-path($map-retina)) / 2) auto);
+@mixin sprites($class, $name, $icons-map: icons, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
+  #{$class} {
+    @content;
+    $image-width: image-width(sprite-file($map, $name));
+    $image-height: image-height(sprite-file($map, $name));
+    overflow: hidden;
+    background-position: sprite-position($map, $name);
+    @extend %comma-separated;
+    @if $size == false{
+    } @else if $size == true{
+      width: $image-width;
+      height: $image-height;
+    }
+    @if $center == false{
+    } @else if $center == true{
+      position: absolute;
+      top: $half;
+      left: $half;
+      margin-top: -($image-height / 2);
+      margin-left: -($image-width / 2);
+    }
+    @if $center-y == false{
+    } @else if $center-y == true{
+      position: absolute;
+      top: $half;
+      margin-top: -($image-height / 2);
+    }
+    @if $center-x == false{
+    } @else if $center-x == true{
+      position: absolute;
+      left: $half;
+      margin-left: -($image-width / 2);
+    }
+    @if $retina == true{
+      @extend %comma-separated-retina;
+      @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
+        $position: sprite-position($map-retina, $name);
+        background-position: round(nth($position, 1) / 2) round(nth($position, 2) / 2);
+        background-size: (ceil(image-width(sprite-path($map-retina)) / 2) auto);
+      }
+    } @else if $retina == false{
+    }
   }
 }
