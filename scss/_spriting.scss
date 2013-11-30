@@ -18,7 +18,6 @@ $half: 50%;
   }
 }
 
-//TODO add hover and active pseudo class support
 @mixin sprites($class, $name, $icons-map: icons, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
   #{$class} {
     @content;

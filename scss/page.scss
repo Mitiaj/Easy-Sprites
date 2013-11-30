@@ -1,13 +1,9 @@
 @import "spriting";
-@import "buttons";
-@import "grid";
 
 body {
   width: 100%;
   height: 100%;
 }
-
-//$icons-map: 'states';
 
 $social-icons: facebook, rss, skype, yahoo, gplus;
 @each $item in $social-icons {
@@ -18,14 +14,4 @@ $social-icons: facebook, rss, skype, yahoo, gplus;
     background-color: #f7f7f7;
     margin: 10px;
   }
-}
-
-.test {
-  @include sprites($class: '&:after', $name: gplus, $retina: false) {
-    content: "";
-  }
-}
-
-@include button('.class-name') {
-  border-radius: 4px;
 }

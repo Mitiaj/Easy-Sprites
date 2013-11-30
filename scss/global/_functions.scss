@@ -1,8 +1,0 @@
-//snippet MAIN VARIABLES
-$base-font-size: 100% !default;
-$base-line-height: 150% !default;
-$em-base: 19px !default;
-
-@function emCalc($pxWidth) {
-  @return $pxWidth / $em-base * 1em;
-}
