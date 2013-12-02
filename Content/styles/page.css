@@ -1,10 +1,10 @@
-.social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus {
-  background: url('images/icons-s97758c514d.png') no-repeat;
+.social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus, .test:after {
+  background: url('images/icons-s13742319f8.png') no-repeat;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus {
-    background: url('images/icons@x2-s100a20fc2c.png') no-repeat;
+  .social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus, .test:after {
+    background: url('images/icons@x2-s5c206a083d.png') no-repeat;
   }
 }
 
@@ -20,14 +20,14 @@ body {
   background-color: #f7f7f7;
   margin: 10px;
   overflow: hidden;
-  background-position: 0 -104px;
+  background-position: -168px 0;
   width: 32px;
   height: 32px;
 }
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
   .social-facebook {
-    background-position: 0 -104px;
-    background-size: 32px auto;
+    background-position: -168px 0;
+    background-size: 256px auto;
   }
 }
 
@@ -45,7 +45,7 @@ body {
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
   .social-rss {
     background-position: 0 0;
-    background-size: 32px auto;
+    background-size: 256px auto;
   }
 }
 
@@ -56,14 +56,14 @@ body {
   background-color: #f7f7f7;
   margin: 10px;
   overflow: hidden;
-  background-position: 0 -72px;
+  background-position: -104px 0;
   width: 32px;
   height: 32px;
 }
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
   .social-skype {
-    background-position: 0 -72px;
-    background-size: 32px auto;
+    background-position: -104px 0;
+    background-size: 256px auto;
   }
 }
 
@@ -74,14 +74,14 @@ body {
   background-color: #f7f7f7;
   margin: 10px;
   overflow: hidden;
-  background-position: 0 -16px;
+  background-position: -16px 0;
   width: 24px;
   height: 24px;
 }
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
   .social-yahoo {
-    background-position: 0 -16px;
-    background-size: 32px auto;
+    background-position: -16px 0;
+    background-size: 256px auto;
   }
 }
 
@@ -92,13 +92,46 @@ body {
   background-color: #f7f7f7;
   margin: 10px;
   overflow: hidden;
-  background-position: 0 -40px;
+  background-position: -72px 0;
   width: 32px;
   height: 32px;
 }
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
   .social-gplus {
-    background-position: 0 -40px;
-    background-size: 32px auto;
+    background-position: -72px 0;
+    background-size: 256px auto;
+  }
+}
+
+.test {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+}
+.test:after {
+  content: "";
+  z-index: 10;
+  overflow: hidden;
+  background-position: -136px 0;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -16px;
+  margin-left: -16px;
+}
+.test:after:hover {
+  background-position: -40px 0;
+}
+@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+  .test:after {
+    background-position: -136px 0;
+    background-size: 256px auto;
+  }
+  .test:after:hover {
+    background-position: -40px 0;
   }
 }
