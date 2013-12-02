@@ -18,6 +18,8 @@ $half: 50%;
   }
 }
 
+//TODO create HOVER & ACTIVE options
+//TODO add ability to switch off comma-separated images.
 @mixin sprites($class, $name, $icons-map: icons, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
   #{$class} {
     @content;
