@@ -1,9 +1,9 @@
-.social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus, .test:after {
+.social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus, .a .after {
   background: url('images/icons-s13742319f8.png') no-repeat;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus, .test:after {
+  .social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus, .a .after {
     background: url('images/icons@x2-s5c206a083d.png') no-repeat;
   }
 }
@@ -110,7 +110,11 @@ body {
   width: 50px;
   height: 50px;
 }
-.test:after {
+
+.a:hover:after {
+  background-position: -40px 0;
+}
+.a .after {
   content: "";
   z-index: 10;
   overflow: hidden;
@@ -123,15 +127,12 @@ body {
   margin-top: -16px;
   margin-left: -16px;
 }
-.test:after:hover {
-  background-position: -40px 0;
-}
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .test:after {
+  .a .after {
     background-position: -136px 0;
     background-size: 256px auto;
   }
-  .test:after:hover {
+  .a .after:hover {
     background-position: -40px 0;
   }
 }

@@ -21,6 +21,15 @@ $half: 50%;
 //TODO create HOVER & ACTIVE options
 //TODO add ability to switch off comma-separated classes.
 @mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
+  @if $hover == false{
+  } @else if $hover == true{
+    &:hover {
+      &:after {
+        $sprite-hover: $name + -hover;
+        background-position: sprite-position($map, $sprite-hover);
+      }
+    }
+  }
   #{$class} {
     @content;
     $image-width: image-width(sprite-file($map, $name));
@@ -29,13 +38,6 @@ $half: 50%;
     background-position: sprite-position($map, $name);
     @extend %comma-separated;
 
-    @if $hover == false{
-    } @else if $hover == true{
-      &:hover {
-        $sprite-hover: $name + -hover;
-        background-position: sprite-position($map, $sprite-hover);
-      }
-    }
     @if $active == false{
     } @else if $active == true{
       &:hover {
@@ -75,6 +77,7 @@ $half: 50%;
 
     @if $retina == true{
       @extend %comma-separated-retina;
+
       @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
         $position: sprite-position($map-retina, $name);
         background-position: round(nth($position, 1) / 2) round(nth($position, 2) / 2);
@@ -94,8 +97,8 @@ $half: 50%;
             background-position: sprite-position($map, $sprite-active);
           }
         }
-
       }
+
     } @else if $retina == false{
     }
 
