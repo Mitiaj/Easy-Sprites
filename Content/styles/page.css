@@ -1,9 +1,9 @@
-.test:after {
+.test {
   background: url('images/icons-s13742319f8.png') no-repeat;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .test:after {
+  .test {
     background: url('images/icons@x2-s5c206a083d.png') no-repeat;
   }
 }
@@ -14,18 +14,6 @@ body {
 }
 
 .test {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  width: 50px;
-  height: 50px;
-}
-.test:after:hover {
-  background-position: -40px 0;
-}
-.test:after {
-  content: "";
-  z-index: 10;
   background-position: -136px 0;
   width: 32px;
   height: 32px;
@@ -36,12 +24,14 @@ body {
   margin-top: -16px;
   margin-left: -16px;
 }
+
+.test:hover {
+  background-position: -40px 0;
+}
+
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .test:after {
+  .test {
     background-position: -136px 0;
     background-size: 256px auto;
-  }
-  .test:after:hover {
-    background-position: -40px 0;
   }
 }

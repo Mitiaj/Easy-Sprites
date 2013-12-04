@@ -20,38 +20,16 @@ $half: 50%;
   }
 }
 
+$hover-pseudo: false !default;
+$active-pseudo: false !default;
+
+//TODO (use pseudo is optional)
+$use-pseudo-icon: false !default;
 //TODO create HOVER & ACTIVE options
 //TODO add ability to switch off comma-separated classes.
 @mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
 
-  @if $hover == false{
-  } @else if $hover == true{
-    //noinspection ALL
-    &:after {
-      @at-root (without:media) {
-        @warn "error this";
-        &:hover {
-          $sprite-hover: $name + -hover;
-          background-position: sprite-position($map, $sprite-hover);
-        }
-      }
-    }
-  }
-
-  //  @include respond-to(retina) {
-  //    @if $hover == false{
-  //    } @else if $hover == true{
-  //      &:hover {
-  //        &:after {
-  //          $sprite-hover: $name + -hover;
-  //          background-position: sprite-position($map, $sprite-hover);
-  //        }
-  //      }
-  //    }
-  //  }
-
   #{$class} {
-
     @content;
     $image-width: image-width(sprite-file($map, $name));
     $image-height: image-height(sprite-file($map, $name));
@@ -88,26 +66,40 @@ $half: 50%;
       margin-left: -($image-width / 2);
     }
 
-    @if $retina == true{
-      @extend %comma-separated-retina;
+  }
 
-      @include respond-to(retina) {
-
-        $position: sprite-position($map-retina, $name);
-        background-position: round(nth($position, 1) / 2) round(nth($position, 2) / 2);
-        background-size: (ceil(image-width(sprite-path($map-retina)) / 2) auto);
-        @if $hover == false{
-        } @else if $hover == true{
-          &:hover {
+  @if $use-pseudo-icon {
+    @if $hover {
+      #{$class} {
+        &:hover {
+          &:after {
+            content: "";
             $sprite-hover: $name + -hover;
             background-position: sprite-position($map, $sprite-hover);
           }
         }
-
       }
-
-    } @else if $retina == false{
     }
-
+  } @else {
+    @if $hover {
+      #{$class} {
+        &:hover {
+          $sprite-hover: $name + -hover;
+          background-position: sprite-position($map, $sprite-hover);
+        }
+      }
+    }
   }
+
+  @if $retina {
+    #{$class} {
+      @extend %comma-separated-retina;
+      @include respond-to(retina) {
+        $position: sprite-position($map-retina, $name);
+        background-position: round(nth($position, 1) / 2) round(nth($position, 2) / 2);
+        background-size: (ceil(image-width(sprite-path($map-retina)) / 2) auto);
+      }
+    }
+  }
+
 }
