@@ -1,9 +1,9 @@
-.social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus, .a .after {
+.test:after {
   background: url('images/icons-s13742319f8.png') no-repeat;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .social-facebook, .social-rss, .social-skype, .social-yahoo, .social-gplus, .a .after {
+  .test:after {
     background: url('images/icons@x2-s5c206a083d.png') no-repeat;
   }
 }
@@ -13,96 +13,6 @@ body {
   height: 100%;
 }
 
-.social-facebook {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  background-color: #f7f7f7;
-  margin: 10px;
-  overflow: hidden;
-  background-position: -168px 0;
-  width: 32px;
-  height: 32px;
-}
-@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .social-facebook {
-    background-position: -168px 0;
-    background-size: 256px auto;
-  }
-}
-
-.social-rss {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  background-color: #f7f7f7;
-  margin: 10px;
-  overflow: hidden;
-  background-position: 0 0;
-  width: 16px;
-  height: 16px;
-}
-@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .social-rss {
-    background-position: 0 0;
-    background-size: 256px auto;
-  }
-}
-
-.social-skype {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  background-color: #f7f7f7;
-  margin: 10px;
-  overflow: hidden;
-  background-position: -104px 0;
-  width: 32px;
-  height: 32px;
-}
-@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .social-skype {
-    background-position: -104px 0;
-    background-size: 256px auto;
-  }
-}
-
-.social-yahoo {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  background-color: #f7f7f7;
-  margin: 10px;
-  overflow: hidden;
-  background-position: -16px 0;
-  width: 24px;
-  height: 24px;
-}
-@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .social-yahoo {
-    background-position: -16px 0;
-    background-size: 256px auto;
-  }
-}
-
-.social-gplus {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  background-color: #f7f7f7;
-  margin: 10px;
-  overflow: hidden;
-  background-position: -72px 0;
-  width: 32px;
-  height: 32px;
-}
-@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .social-gplus {
-    background-position: -72px 0;
-    background-size: 256px auto;
-  }
-}
-
 .test {
   position: relative;
   display: inline-block;
@@ -110,17 +20,16 @@ body {
   width: 50px;
   height: 50px;
 }
-
-.a:hover:after {
+.test:after:hover {
   background-position: -40px 0;
 }
-.a .after {
+.test:after {
   content: "";
   z-index: 10;
-  overflow: hidden;
   background-position: -136px 0;
   width: 32px;
   height: 32px;
+  overflow: hidden;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -128,11 +37,11 @@ body {
   margin-left: -16px;
 }
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .a .after {
+  .test:after {
     background-position: -136px 0;
     background-size: 256px auto;
   }
-  .a .after:hover {
+  .test:after:hover {
     background-position: -40px 0;
   }
 }
