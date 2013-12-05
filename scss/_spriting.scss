@@ -20,47 +20,39 @@ $half: 50%;
   }
 }
 
-$hover-pseudo: false !default;
-$active-pseudo: false !default;
-
 //TODO (use pseudo is optional)
 $use-pseudo-icon: false !default;
-//TODO create HOVER & ACTIVE options
 //TODO add ability to switch off comma-separated classes.
-@mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
 
+@mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
+  //fixme find betterplace for variables
+  $sprite-hover: $name + -hover;
+  $sprite-active: $name + -active;
+  $image-width: image-width(sprite-file($map, $name));
+  $image-height: image-height(sprite-file($map, $name));
+  //
   #{$class} {
     @content;
-    $image-width: image-width(sprite-file($map, $name));
-    $image-height: image-height(sprite-file($map, $name));
     background-position: sprite-position($map, $name);
     @extend %comma-separated;
 
-    @if $size == false{
-    } @else if $size == true{
+    @if $size {
       width: $image-width;
       height: $image-height;
       overflow: hidden;
     }
 
-    @if $center == false{
-    } @else if $center == true{
+    @if $center {
       position: absolute;
       top: $half;
       left: $half;
       margin-top: -($image-height / 2);
       margin-left: -($image-width / 2);
-    }
-
-    @if $center-y == false{
-    } @else if $center-y == true{
+    } @else if $center-y {
       position: absolute;
       top: $half;
       margin-top: -($image-height / 2);
-    }
-
-    @if $center-x == false{
-    } @else if $center-x == true{
+    } @else if $center-x {
       position: absolute;
       left: $half;
       margin-left: -($image-width / 2);
@@ -74,8 +66,18 @@ $use-pseudo-icon: false !default;
         &:hover {
           &:after {
             content: "";
-            $sprite-hover: $name + -hover;
             background-position: sprite-position($map, $sprite-hover);
+          }
+        }
+      }
+    }
+
+    @if $active {
+      #{$class} {
+        &:active {
+          &:after {
+            content: "";
+            background-position: sprite-position($map, $sprite-active);
           }
         }
       }
@@ -84,8 +86,15 @@ $use-pseudo-icon: false !default;
     @if $hover {
       #{$class} {
         &:hover {
-          $sprite-hover: $name + -hover;
           background-position: sprite-position($map, $sprite-hover);
+        }
+      }
+    }
+
+    @if $active {
+      #{$class} {
+        &:active {
+          background-position: sprite-position($map, $sprite-active);
         }
       }
     }
