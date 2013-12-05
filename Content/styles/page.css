@@ -1,9 +1,9 @@
-.test {
+.test:after {
   background: url('images/icons-s13742319f8.png') no-repeat;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .test {
+  .test:after {
     background: url('images/icons@x2-s5c206a083d.png') no-repeat;
   }
 }
@@ -11,12 +11,15 @@
 .test {
   display: inline-block;
   position: relative;
+}
+.test:after {
+  content: "";
   background-position: -136px 0;
   width: 32px;
   height: 32px;
   overflow: hidden;
 }
-.test:hover {
+.test:hover:after {
   background-position: -40px 0;
 }
 
@@ -24,11 +27,12 @@
   .test {
     display: inline-block;
     position: relative;
+  }
+  .test:after {
     background-position: -136px 0;
     background-size: 256px auto;
   }
-  .test:hover {
+  .test:hover:after {
     background-position: -40px 0;
-    background-size: 256px auto;
   }
 }
