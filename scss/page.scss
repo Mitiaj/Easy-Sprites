@@ -2,11 +2,6 @@
 
 //TODO create responsive grid
 
-body {
-  width: 100%;
-  height: 100%;
-}
-
 //$social-icons: facebook, rss, skype, yahoo, gplus;
 //@each $item in $social-icons {
 //  @include sprites($class: '.social-#{$item}', $name: $item) {
@@ -18,12 +13,18 @@ body {
 //  }
 //}
 
-$hover-pseudo: true;
-@include sprites($class: '.test', $name: imgclock, $hover: true, $center: true) {
-  //  $use-pseudo-icon: true;
+//$hover-pseudo: true;
+@include sprites($class: '.test', $name: imgclock, $hover: true) {
+  display: inline-block;
+  position: relative;
 }
 
 //TODO keep for further testings
-//@include sprites($class: '.test-2', $name: imgclock, $hover: true, $center: true) {
-//  $use-pseudo-icon: true;
+//@include sprites($class: '.test-2', $name: imgclock, $center: true) {
+//
 //}
+//
+//@include sprites($class: '.test-3', $name: imgclock, $pseudo: true, $hover: true) {
+//
+//}
+

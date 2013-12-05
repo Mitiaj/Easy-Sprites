@@ -20,79 +20,78 @@ $half: 50%;
   }
 }
 
-//TODO (use pseudo is optional)
-$use-pseudo-icon: false !default;
-//TODO add ability to switch off comma-separated classes.
-
-@mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
-  //fixme find betterplace for variables
+//TODO add ability to switch off comma-separated classes. $comma-separated: true !default;
+@mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $pseudo: false, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
   $sprite-hover: $name + -hover;
   $sprite-active: $name + -active;
+
   $image-width: image-width(sprite-file($map, $name));
   $image-height: image-height(sprite-file($map, $name));
   //
-  #{$class} {
-    @content;
-    background-position: sprite-position($map, $name);
-    @extend %comma-separated;
 
-    @if $size {
-      width: $image-width;
-      height: $image-height;
-      overflow: hidden;
-    }
+  @if $pseudo {
+    #{$class} {
+      @content;
+      &:after {
+        @extend %comma-separated;
+        content: "";
+        background-position: sprite-position($map, $name);
+        @if $size {
+          width: $image-width;
+          height: $image-height;
+          overflow: hidden;
+        }
+        @if $center {
+          position: absolute;
+          top: $half;
+          left: $half;
+          margin-top: -($image-height / 2);
+          margin-left: -($image-width / 2);
+        } @else if $center-y {
+          position: absolute;
+          top: $half;
+          margin-top: -($image-height / 2);
+        } @else if $center-x {
+          position: absolute;
+          left: $half;
+          margin-left: -($image-width / 2);
+        }
+      }
 
-    @if $center {
-      position: absolute;
-      top: $half;
-      left: $half;
-      margin-top: -($image-height / 2);
-      margin-left: -($image-width / 2);
-    } @else if $center-y {
-      position: absolute;
-      top: $half;
-      margin-top: -($image-height / 2);
-    } @else if $center-x {
-      position: absolute;
-      left: $half;
-      margin-left: -($image-width / 2);
-    }
-
-  }
-
-  @if $use-pseudo-icon {
-    @if $hover {
-      #{$class} {
+      @if $hover {
         &:hover {
           &:after {
-            content: "";
             background-position: sprite-position($map, $sprite-hover);
           }
         }
       }
-    }
 
-    @if $active {
-      #{$class} {
+      @if $active {
         &:active {
           &:after {
-            content: "";
             background-position: sprite-position($map, $sprite-active);
           }
         }
       }
     }
   } @else {
-    @if $hover {
-      #{$class} {
+    #{$class} {
+      @content;
+      @extend %comma-separated;
+      background-position: sprite-position($map, $name);
+      @if $size {
+        width: $image-width;
+        height: $image-height;
+        overflow: hidden;
+      }
+
+      @if $hover {
         &:hover {
           background-position: sprite-position($map, $sprite-hover);
         }
       }
-    }
 
-    @if $active {
-      #{$class} {
+      @if $active {
         &:active {
           background-position: sprite-position($map, $sprite-active);
         }
@@ -101,14 +100,61 @@ $use-pseudo-icon: false !default;
   }
 
   @if $retina {
-    #{$class} {
-      @extend %comma-separated-retina;
-      @include respond-to(retina) {
-        $position: sprite-position($map-retina, $name);
-        background-position: round(nth($position, 1) / 2) round(nth($position, 2) / 2);
-        background-size: (ceil(image-width(sprite-path($map-retina)) / 2) auto);
+    @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
+
+      $bg-retina: sprite-position($map-retina, $name);
+      $bg-retina-position: join(round(nth($bg-retina, 1) / 2), round(nth($bg-retina, 2) / 2));
+      $bg-size-retina: (ceil(image-width(sprite-path($map-retina)) / 2) auto);
+
+      @if $pseudo {
+        #{$class} {
+          @content;
+          &:after {
+            @extend %comma-separated-retina;
+            background-position: $bg-retina-position;
+            background-size: $bg-size-retina;
+          }
+
+          @if $hover {
+            &:hover {
+              &:after {
+                background-position: round(nth(sprite-position($map-retina, $sprite-hover), 1) / 2) round(nth(sprite-position($map-retina, $sprite-hover), 2) / 2);
+                background-size: $bg-size-retina;
+              }
+            }
+          }
+
+          @if $active {
+            &:active {
+              &:after {
+                background-position: round(nth(sprite-position($map-retina, $sprite-active), 1) / 2) round(nth(sprite-position($map-retina, $sprite-active), 2) / 2);
+                background-size: $bg-size-retina;
+              }
+            }
+          }
+        }
+      } @else {
+        #{$class} {
+          @content;
+          @extend %comma-separated-retina;
+          background-position: $bg-retina-position;
+          background-size: $bg-size-retina;
+          @if $hover {
+            &:hover {
+              background-position: round(nth(sprite-position($map-retina, $sprite-hover), 1) / 2) round(nth(sprite-position($map-retina, $sprite-hover), 2) / 2);
+              background-size: $bg-size-retina;
+            }
+          }
+          @if $active {
+            &:active {
+              background-position: round(nth(sprite-position($map-retina, $sprite-active), 1) / 2) round(nth(sprite-position($map-retina, $sprite-active), 2) / 2);
+              background-size: $bg-size-retina;
+            }
+          }
+        }
+
       }
     }
-  }
 
+  }
 }

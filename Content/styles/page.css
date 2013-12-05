@@ -8,30 +8,27 @@
   }
 }
 
-body {
-  width: 100%;
-  height: 100%;
-}
-
 .test {
+  display: inline-block;
+  position: relative;
   background-position: -136px 0;
   width: 32px;
   height: 32px;
   overflow: hidden;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -16px;
-  margin-left: -16px;
 }
-
 .test:hover {
   background-position: -40px 0;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
   .test {
+    display: inline-block;
+    position: relative;
     background-position: -136px 0;
+    background-size: 256px auto;
+  }
+  .test:hover {
+    background-position: -40px 0;
     background-size: 256px auto;
   }
 }
