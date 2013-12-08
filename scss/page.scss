@@ -13,6 +13,7 @@
 //  }
 //}
 
+//$icons-map: 'icons';
 //$hover-pseudo: true;
 @include sprites($class: '.test', $name: imgclock, $hover: true, $pseudo: true) {
   display: inline-block;

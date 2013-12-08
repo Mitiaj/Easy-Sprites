@@ -1,63 +1,69 @@
 $icons-map: 'icons' !default;
 
-$map: sprite-map("#{$icons-map}/*.png", $layout: smart);
-$map-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+$m: sprite-map("#{$icons-map}/*.png", $layout: smart);
+$m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
 $half: 50%;
 
 %comma-separated {
   @each $item in $icons-map {
-    background: $map no-repeat;
+    background: $m no-repeat;
   }
 }
 
 %comma-separated-retina {
   @each $item in $icons-map {
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
-      background: $map-retina no-repeat;
+      background: $m-retina no-repeat;
     }
   }
 }
 
 //noinspection SassScssUnresolvedFunction
-@function position($map, $name) {
-  @return (sprite-position($map, $name));
+@function size-retina($m-retina) {
+  @return ((ceil(image-width(sprite-path($m-retina)) / 2) auto));
 }
 
 //noinspection SassScssUnresolvedFunction
-@function size-retina($map-retina) {
-  @return ((ceil(image-width(sprite-path($map-retina)) / 2) auto));
+@function position($m, $s-name: false, $h-name: false, $a-name: false) {
+  @if $s-name {
+    @return (sprite-position($m, $s-name));
+  }
+  @if $h-name {
+    @return (sprite-position($m, $h-name));
+  }
+  @if $a-name {
+    @return (sprite-position($m, $a-name));
+  }
 }
 
 //noinspection SassScssUnresolvedFunction
-@function position-retina($map-retina, $sprite-name: false, $hover-name: false, $active-name: false) {
-
-  @if $sprite-name {
+@function position-retina($m, $s-name: false, $h-name: false, $a-name: false) {
+  @if $s-name {
     @return (
-    round(nth(sprite-position($map-retina, $sprite-name), 1) / 2)
-    round(nth(sprite-position($map-retina, $sprite-name), 2) / 2)
+    round(nth(sprite-position($m, $s-name), 1) / 2)
+    round(nth(sprite-position($m, $s-name), 2) / 2)
     );
   }
-  @if $hover-name {
+  @if $h-name {
     @return (
-    round(nth(sprite-position($map-retina, $hover-name), 1) / 2)
-    round(nth(sprite-position($map-retina, $hover-name), 2) / 2)
+    round(nth(sprite-position($m, $h-name), 1) / 2)
+    round(nth(sprite-position($m, $h-name), 2) / 2)
     );
   }
-  @if $active-name {
+  @if $a-name {
     @return (
-    round(nth(sprite-position($map-retina, $active-name), 1) / 2)
-    round(nth(sprite-position($map-retina, $active-name), 2) / 2)
+    round(nth(sprite-position($m, $a-name), 1) / 2)
+    round(nth(sprite-position($m, $a-name), 2) / 2)
     );
   }
-
 }
 
-//TODO add ability to switch off comma-separated classes. $comma-separated: true !default;
+//TODO add ability to switch off comma-separated classes. "$comma-separated: true !default";
 @mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $pseudo: false, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
-  $hover-name: $name + -hover;
-  $active-name: $name + -active;
-  $image-width: image-width(sprite-file($map, $name));
-  $image-height: image-height(sprite-file($map, $name));
+  $h-name: $name + -hover;
+  $a-name: $name + -active;
+  $image-width: image-width(sprite-file($m, $name));
+  $image-height: image-height(sprite-file($m, $name));
 
   @if $pseudo {
     #{$class} {
@@ -65,7 +71,7 @@ $half: 50%;
       &:after {
         @extend %comma-separated;
         content: "";
-        background-position: position($map, $name);
+        background-position: position($m, $name);
         @if $size {
           width: $image-width;
           height: $image-height;
@@ -91,7 +97,7 @@ $half: 50%;
       @if $hover {
         &:hover {
           &:after {
-            background-position: sprite-position($map, $hover-name);
+            background-position: position($m, $h-name);
           }
         }
       }
@@ -99,7 +105,7 @@ $half: 50%;
       @if $active {
         &:active {
           &:after {
-            background-position: sprite-position($map, $active-name);
+            background-position: position($m, $a-name);
           }
         }
       }
@@ -108,7 +114,7 @@ $half: 50%;
     #{$class} {
       @content;
       @extend %comma-separated;
-      background-position: position($map, $name);
+      background-position: position($m, $name);
       @if $size {
         width: $image-width;
         height: $image-height;
@@ -117,13 +123,13 @@ $half: 50%;
 
       @if $hover {
         &:hover {
-          background-position: sprite-position($map, $hover-name);
+          background-position: position($m, $h-name);
         }
       }
 
       @if $active {
         &:active {
-          background-position: sprite-position($map, $active-name);
+          background-position: position($m, $a-name);
         }
       }
     }
@@ -137,14 +143,14 @@ $half: 50%;
           @content;
           &:after {
             @extend %comma-separated-retina;
-            background-position: position-retina($map-retina, $name);
-            background-size: size-retina($map-retina);
+            background-position: position-retina($m-retina, $name);
+            background-size: size-retina($m-retina);
           }
 
           @if $hover {
             &:hover {
               &:after {
-                background-position: position-retina($map-retina, $hover-name);
+                background-position: position-retina($m-retina, $h-name);
               }
             }
           }
@@ -152,7 +158,7 @@ $half: 50%;
           @if $active {
             &:active {
               &:after {
-                background-position: position-retina($map-retina, $active-name);
+                background-position: position-retina($m-retina, $a-name);
               }
             }
           }
@@ -161,16 +167,16 @@ $half: 50%;
         #{$class} {
           @content;
           @extend %comma-separated-retina;
-          background-position: position-retina($map-retina, $name);
-          background-size: size-retina($map-retina);
+          background-position: position-retina($m-retina, $name);
+          background-size: size-retina($m-retina);
           @if $hover {
             &:hover {
-              background-position: position-retina($map-retina, $hover-name);
+              background-position: position-retina($m-retina, $h-name);
             }
           }
           @if $active {
             &:active {
-              background-position: position-retina($map-retina, $active-name);
+              background-position: position-retina($m-retina, $a-name);
             }
           }
         }
