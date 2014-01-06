@@ -58,7 +58,7 @@ By default centering is set to false if you need to center your image to x, y or
  ```
 
 ###Legend
-Helper variables meaning.
+Helper variables explain.
  ```scss
  $h-name == hover state
  $a-name == active state
