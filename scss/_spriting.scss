@@ -1,9 +1,3 @@
-//todo $h-name == hover state
-//todo $a-name == active state
-//todo $s-name == default state
-//todo $m == default map
-//todo $m-retina == retina map
-
 $icons-map: 'icons' !default;
 
 $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
@@ -103,7 +97,6 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
           height: $image-height;
           overflow: hidden;
         }
-
       }
 
       @if $hover {
@@ -195,8 +188,6 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
           }
         }
       }
-
     }
   }
-
 }
