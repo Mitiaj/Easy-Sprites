@@ -24,8 +24,8 @@ Create two folders in your choosen scss images folder. For example I've created 
 In your main **.scss** file create **@include** with options to generate sprite images.
 Use $class option to add class name. When use pseudo elements for sprites, class name should be set accordingly.
  ```scss
-  @include($class: '&', $name:'image-name') //if adding inside class as a module
-  @include($class: '.class-name', $name:'image-name') //if adding as standalone class
+  @include($class: '&', $name:'image-name') //if adding inside class as a module with $pseudo:true
+  @include($class: '.class-name', $name:'image-name', $pseudo: false) //if adding as standalone class or selector within a module
  ```
 
 ####Available options
