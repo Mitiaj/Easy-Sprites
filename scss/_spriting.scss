@@ -17,12 +17,10 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
   }
 }
 
-//noinspection SassScssUnresolvedFunction
 @function size-retina($m-retina) {
   @return ((ceil(image-width(sprite-path($m-retina)) / 2) auto));
 }
 
-//noinspection SassScssUnresolvedFunction
 @function position($m, $d-name: false, $h-name: false, $a-name: false) {
   @if $d-name {
     @return (sprite-position($m, $d-name));
@@ -35,7 +33,6 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
   }
 }
 
-//noinspection SassScssUnresolvedFunction
 @function position-retina($m, $d-name: false, $h-name: false, $a-name: false) {
   @if $d-name {
     @return (
@@ -57,7 +54,7 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
   }
 }
 
-@mixin center($center, $half, $image-height, $image-width, $center-y, $center-x) {
+@mixin _center($center, $half, $image-height, $image-width, $center-y, $center-x) {
   @if $center {
     position: absolute;
     top: $half;
@@ -87,7 +84,7 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
     #{$class} {
       &:after {
         content: "";
-        @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
+        @include _center($center, $half, $image-height, $image-width, $center-y, $center-x);
         background-position: position($m, $name);
         @content;
         @extend %comma-separated;
@@ -117,7 +114,7 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
     }
   } @else {
     #{$class} {
-      @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
+      @include _center($center, $half, $image-height, $image-width, $center-y, $center-x);
       background-position: position($m, $name);
       @content;
       @extend %comma-separated;
@@ -144,7 +141,6 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
 
   @if $retina {
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
-
       @if $pseudo {
         #{$class} {
           &:after {
