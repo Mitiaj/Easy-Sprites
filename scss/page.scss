@@ -3,15 +3,19 @@
 $social-icons: facebook, rss, skype, yahoo, gplus;
 @each $item in $social-icons {
   @include sprites($class: '.social-#{$item}', $name: $item) {
-    display: inline-block;
-    vertical-align: middle;
+    display: block;
     background-color: #f7f7f7;
     margin: 10px;
   }
 }
 
-@include sprites($class: '.test', $name: imgclock, $pseudo: false, $center-y: true, $hover: true) {
-  display: inline-block;
+.test {
+  position: relative;
+  padding-left: 60px;
+  @include sprites($class: '&', $name: imgclock, $center-y: true, $hover: true) {
+    display: block;
+    left: 0;
+  }
 }
 
 .other-test {
