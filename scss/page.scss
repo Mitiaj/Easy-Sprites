@@ -1,31 +1,20 @@
 @import "spriting";
 
-//TODO create responsive grid
-
-//$social-icons: facebook, rss, skype, yahoo, gplus;
-//@each $item in $social-icons {
-//  @include sprites($class: '.social-#{$item}', $name: $item) {
-//    position: relative;
-//    display: inline-block;
-//    vertical-align: middle;
-//    background-color: #f7f7f7;
-//    margin: 10px;
-//  }
-//}
-
-//$icons-map: 'icons';
-//$hover-pseudo: true;
-@include sprites($class: '.test', $name: imgclock, $hover: true, $pseudo: true) {
-  display: inline-block;
-  position: relative;
+$social-icons: facebook, rss, skype, yahoo, gplus;
+@each $item in $social-icons {
+  @include sprites($class: '.social-#{$item}', $name: $item) {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #f7f7f7;
+    margin: 10px;
+  }
 }
 
-//TODO keep for further testings
-//@include sprites($class: '.test-2', $name: imgclock, $center: true) {
-//
-//}
-//
-//@include sprites($class: '.test-3', $name: imgclock, $pseudo: true, $hover: true) {
-//
-//}
+@include sprites($class: '.test', $name: imgclock, $pseudo: false, $center-y: true, $hover: true) {
+  display: inline-block;
+}
+
+.other-test {
+  @include sprites($class: '&', $name: gplus, $center: true)
+}
 

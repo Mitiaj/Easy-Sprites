@@ -36,7 +36,6 @@ By default I've enabled element size to true which set's width and height to act
  $size: true //bool
  ```
 If you don't need to generate sprites for retina screens don't create **icons@x2** folder and set it to false.
-
  ```scss
  $retina: true //bool
  ```
@@ -45,4 +44,23 @@ By default centering is set to false if you need to center your image to x or y 
  $center: false //bool
  $center-y: false //bool
  $center-x: false //bool
+ ```
+By default sprite images is enabled for pseudo elements
+ ```scss
+ $pseudo: true //bool
+ ```
+When use pseudo elements class names should be set accordingly
+ ```scss
+ @include($class: '&', $name:'your-image-name') //if adding inside class as a module
+ @include($class: '.class-name', $name:'your-image-name') //if adding as standalone class
+ ```
+
+###Legend
+Variables meaning.
+ ```scss
+ $h-name == hover state
+ $a-name == active state
+ $s-name == default state
+ $m == default map
+ $m-retina == retina map
  ```

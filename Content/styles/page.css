@@ -1,38 +1,164 @@
-.test:after {
+.social-facebook:after, .social-rss:after, .social-skype:after, .social-yahoo:after, .social-gplus:after, .test, .other-test:after {
   background: url('images/icons-s13742319f8.png') no-repeat;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .test:after {
+  .social-facebook:after, .social-rss:after, .social-skype:after, .social-yahoo:after, .social-gplus:after, .test, .other-test:after {
     background: url('images/icons@x2-s5c206a083d.png') no-repeat;
   }
 }
 
-.test {
+.social-facebook:after {
   display: inline-block;
-  position: relative;
-}
-.test:after {
+  vertical-align: middle;
+  background-color: #f7f7f7;
+  margin: 10px;
   content: "";
-  background-position: -136px 0;
+  background-position: -168px 0;
   width: 32px;
   height: 32px;
   overflow: hidden;
 }
-.test:hover:after {
+
+@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+  .social-facebook:after {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #f7f7f7;
+    margin: 10px;
+    background-position: -168px 0;
+    background-size: 256px auto;
+  }
+}
+.social-rss:after {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #f7f7f7;
+  margin: 10px;
+  content: "";
+  background-position: 0 0;
+  width: 16px;
+  height: 16px;
+  overflow: hidden;
+}
+
+@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+  .social-rss:after {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #f7f7f7;
+    margin: 10px;
+    background-position: 0 0;
+    background-size: 256px auto;
+  }
+}
+.social-skype:after {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #f7f7f7;
+  margin: 10px;
+  content: "";
+  background-position: -104px 0;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+}
+
+@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+  .social-skype:after {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #f7f7f7;
+    margin: 10px;
+    background-position: -104px 0;
+    background-size: 256px auto;
+  }
+}
+.social-yahoo:after {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #f7f7f7;
+  margin: 10px;
+  content: "";
+  background-position: -16px 0;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+}
+
+@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+  .social-yahoo:after {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #f7f7f7;
+    margin: 10px;
+    background-position: -16px 0;
+    background-size: 256px auto;
+  }
+}
+.social-gplus:after {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #f7f7f7;
+  margin: 10px;
+  content: "";
+  background-position: -72px 0;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+}
+
+@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+  .social-gplus:after {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #f7f7f7;
+    margin: 10px;
+    background-position: -72px 0;
+    background-size: 256px auto;
+  }
+}
+.test {
+  display: inline-block;
+  background-position: -136px 0;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+}
+.test:hover {
   background-position: -40px 0;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
   .test {
     display: inline-block;
-    position: relative;
-  }
-  .test:after {
     background-position: -136px 0;
     background-size: 256px auto;
   }
-  .test:hover:after {
+  .test:hover {
     background-position: -40px 0;
+  }
+}
+.other-test {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -16px;
+  margin-left: -16px;
+}
+.other-test:after {
+  content: "";
+  background-position: -72px 0;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+}
+@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+  .other-test:after {
+    background-position: -72px 0;
+    background-size: 256px auto;
   }
 }

@@ -1,8 +1,13 @@
+//todo $h-name == hover state
+//todo $a-name == active state
+//todo $s-name == default state
+//todo $m == default map
+//todo $m-retina == retina map
+
 $icons-map: 'icons' !default;
 
 $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
 $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
-$half: 50%;
 
 %comma-separated {
   @each $item in $icons-map {
@@ -24,9 +29,9 @@ $half: 50%;
 }
 
 //noinspection SassScssUnresolvedFunction
-@function position($m, $s-name: false, $h-name: false, $a-name: false) {
-  @if $s-name {
-    @return (sprite-position($m, $s-name));
+@function position($m, $d-name: false, $h-name: false, $a-name: false) {
+  @if $d-name {
+    @return (sprite-position($m, $d-name));
   }
   @if $h-name {
     @return (sprite-position($m, $h-name));
@@ -37,11 +42,11 @@ $half: 50%;
 }
 
 //noinspection SassScssUnresolvedFunction
-@function position-retina($m, $s-name: false, $h-name: false, $a-name: false) {
-  @if $s-name {
+@function position-retina($m, $d-name: false, $h-name: false, $a-name: false) {
+  @if $d-name {
     @return (
-    round(nth(sprite-position($m, $s-name), 1) / 2)
-    round(nth(sprite-position($m, $s-name), 2) / 2)
+    round(nth(sprite-position($m, $d-name), 1) / 2)
+    round(nth(sprite-position($m, $d-name), 2) / 2)
     );
   }
   @if $h-name {
@@ -58,8 +63,27 @@ $half: 50%;
   }
 }
 
+@mixin center($center, $half, $image-height, $image-width, $center-y, $center-x) {
+  @if $center {
+    position: absolute;
+    top: $half;
+    left: $half;
+    margin-top: -($image-height / 2);
+    margin-left: -($image-width / 2);
+  } @else if $center-y {
+    position: absolute;
+    top: $half;
+    margin-top: -($image-height / 2);
+  } @else if $center-x {
+    position: absolute;
+    left: $half;
+    margin-left: -($image-width / 2);
+  }
+}
+
 //TODO add ability to switch off comma-separated classes. "$comma-separated: true !default";
-@mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $pseudo: false, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
+@mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $pseudo: true, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
+  $half: 50%;
   $h-name: $name + -hover;
   $a-name: $name + -active;
   $image-width: image-width(sprite-file($m, $name));
@@ -67,32 +91,20 @@ $half: 50%;
 
   @if $pseudo {
     #{$class} {
-      @content;
       &:after {
+        @content;
         @extend %comma-separated;
         content: "";
         background-position: position($m, $name);
+
         @if $size {
           width: $image-width;
           height: $image-height;
           overflow: hidden;
         }
-        @if $center {
-          position: absolute;
-          top: $half;
-          left: $half;
-          margin-top: -($image-height / 2);
-          margin-left: -($image-width / 2);
-        } @else if $center-y {
-          position: absolute;
-          top: $half;
-          margin-top: -($image-height / 2);
-        } @else if $center-x {
-          position: absolute;
-          left: $half;
-          margin-left: -($image-width / 2);
-        }
       }
+
+      @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
 
       @if $hover {
         &:hover {
@@ -115,11 +127,14 @@ $half: 50%;
       @content;
       @extend %comma-separated;
       background-position: position($m, $name);
+
       @if $size {
         width: $image-width;
         height: $image-height;
         overflow: hidden;
       }
+
+      @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
 
       @if $hover {
         &:hover {
@@ -140,8 +155,8 @@ $half: 50%;
 
       @if $pseudo {
         #{$class} {
-          @content;
           &:after {
+            @content;
             @extend %comma-separated-retina;
             background-position: position-retina($m-retina, $name);
             background-size: size-retina($m-retina);
@@ -169,11 +184,13 @@ $half: 50%;
           @extend %comma-separated-retina;
           background-position: position-retina($m-retina, $name);
           background-size: size-retina($m-retina);
+
           @if $hover {
             &:hover {
               background-position: position-retina($m-retina, $h-name);
             }
           }
+
           @if $active {
             &:active {
               background-position: position-retina($m-retina, $a-name);
