@@ -3,12 +3,80 @@
 <head>
     <title></title>
     <link href="Content/styles/page.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+    <style>
+        .block {
+            width: 940px;
+            margin: auto;
+        }
+
+        .block:after {
+            content: "";
+            clear: both;
+            display: table;
+            visibility: hidden;
+        }
+
+        section {
+            float: left;
+            position: relative;
+            width: 450px;
+            padding: 40px;
+            margin: 10px;
+            background-color: #f5f5f5;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
-    <div class="social-facebook"></div>
-    <div class="social-rss"></div>
-    <div class="social-skype"></div>
-    <div class="social-yahoo"></div>
-    <div class="social-gplus"></div>
+
+    <div class="block">
+        <h2>Test sprites without additional options</h2>
+        <section>
+            <div class="social-skype"></div>
+            <div class="social-gplus"></div>
+        </section>
+    </div>
+
+    <div class="block">
+        <h2>Test sprites with "$center", "$center-x", "$center-y" options</h2>
+        <section>
+            <div class="other-test"></div>
+        </section>
+        <section>
+            <div class="other-test-x"></div>
+        </section>
+        <section>
+            <div class="other-test-y"></div>
+        </section>
+    </div>
+
+    <div class="block">
+        <h2>Test sprites with "$retina" option</h2>
+        <section>
+            <div class="no-retina"></div>
+        </section>
+    </div>
+
+    <div class="block">
+        <h2>Test sprites with "$pseudo" option</h2>
+        <section>
+            <div class="test-pseudo">Some text goes here...</div>
+        </section>
+    </div>
+
+    <div class="block">
+        <h2>Test sprites with "$hover" option</h2>
+        <section>
+            <div class="test-hover"></div>
+        </section>
+    </div>
+
+    <div class="block">
+        <h2>Test sprites with "$pseudo" and "$hover" options</h2>
+        <section>
+            <div class="test-pseudo-hover">Some text goes here...</div>
+        </section>
+    </div>
+
 </body>
 </html>
