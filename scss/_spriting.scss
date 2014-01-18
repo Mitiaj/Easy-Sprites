@@ -1,4 +1,6 @@
+//TODO add ability to switch on/off comma-separated classes. somethink like "$comma-separated: true/false !default or !optional";
 $icons-map: 'icons' !default;
+$retina-global: false !default;
 
 $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
 $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
@@ -16,6 +18,9 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
     }
   }
 }
+
+@debug "#{$m} get image path for any screen except retina";
+@debug "#{$m-retina} get image path for retina screens";
 
 @function size-retina($m-retina) {
   @return ((ceil(image-width(sprite-path($m-retina)) / 2) auto));
@@ -72,7 +77,7 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
   }
 }
 
-@mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $pseudo: true, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
+@mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $pseudo: true, $size: true, $center: false, $center-y: false, $center-x: false, $comma: true) {
   $half: 50%;
   $h-name: $name + -hover;
   $a-name: $name + -active;
@@ -84,15 +89,21 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
       &:after {
         content: "";
         @include _center($center, $half, $image-height, $image-width, $center-y, $center-x);
-        background-position: position($m, $name);
-        @content;
-        @extend %comma-separated;
 
         @if $size {
           width: $image-width;
           height: $image-height;
           overflow: hidden;
         }
+
+        @if $comma {
+          background-position: position($m, $name);
+          @extend %comma-separated;
+        } @else {
+          background: $m no-repeat position($m, $name);
+        }
+
+        @content;
       }
 
       @if $hover {
@@ -114,15 +125,21 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
   } @else {
     #{$class} {
       @include _center($center, $half, $image-height, $image-width, $center-y, $center-x);
-      background-position: position($m, $name);
-      @content;
-      @extend %comma-separated;
 
       @if $size {
         width: $image-width;
         height: $image-height;
         overflow: hidden;
       }
+
+      @if $comma {
+        background-position: position($m, $name);
+        @extend %comma-separated;
+      } @else {
+        background: $m no-repeat position($m, $name);
+      }
+
+      @content;
 
       @if $hover {
         &:hover {
@@ -137,37 +154,44 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
       }
     }
   }
-
-  @if $retina {
+  @if $retina-global {
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
       @if $pseudo {
         #{$class} {
           &:after {
-            @extend %comma-separated-retina;
-            background-position: position-retina($m-retina, $name);
+            @if $comma {
+              background-position: position-retina($m-retina, $name);
+              @extend %comma-separated-retina;
+            } @else {
+              background: $m-retina no-repeat position-retina($m-retina, $name);
+            }
             background-size: size-retina($m-retina);
-          }
 
-          @if $hover {
-            &:hover {
-              &:after {
-                background-position: position-retina($m-retina, $h-name);
+            @if $hover {
+              &:hover {
+                &:after {
+                  background-position: position-retina($m-retina, $h-name);
+                }
               }
             }
-          }
 
-          @if $active {
-            &:active {
-              &:after {
-                background-position: position-retina($m-retina, $a-name);
+            @if $active {
+              &:active {
+                &:after {
+                  background-position: position-retina($m-retina, $a-name);
+                }
               }
             }
           }
         }
       } @else {
         #{$class} {
-          @extend %comma-separated-retina;
-          background-position: position-retina($m-retina, $name);
+          @if $comma {
+            background-position: position-retina($m-retina, $name);
+            @extend %comma-separated-retina;
+          } @else {
+            background: $m-retina no-repeat position-retina($m-retina, $name);
+          }
           background-size: size-retina($m-retina);
 
           @if $hover {
