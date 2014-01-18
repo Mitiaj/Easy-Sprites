@@ -1,17 +1,42 @@
 @import "spriting";
 
-body {
-  width: 100%;
-  height: 100%;
-}
-
-$social-icons: facebook, rss, skype, yahoo, gplus;
+$social-icons: 'skype', 'gplus';
 @each $item in $social-icons {
   @include sprites($class: '.social-#{$item}', $name: $item) {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
+    display: block;
     background-color: #f7f7f7;
     margin: 10px;
   }
 }
+
+.test-pseudo {
+  position: relative;
+  padding-left: 40px;
+  @include sprites($class: '&', $name: 'skype', $center-y: true) {
+    display: block;
+    left: 0;
+  }
+}
+
+@include sprites($class: '.test-hover', $name: 'imgclock', $pseudo: false, $hover: true);
+
+.test-pseudo-hover {
+  position: relative;
+  padding-left: 50px;
+  @include sprites($class: '&', $name: 'imgclock', $center-y: true, $hover: true) {
+    display: block;
+    left: 0;
+  }
+}
+
+@include sprites($class: '.other-test', $name: 'gplus', $pseudo: false, $center: true);
+
+@include sprites($class: '.other-test-x', $name: 'gplus', $pseudo: false, $center-x: true) {
+  top: 0;
+}
+
+@include sprites($class: '.other-test-y', $name: 'gplus', $pseudo: false, $center-y: true) {
+  left: 35px;
+}
+
+@include sprites($class: '.no-retina', $name: 'skype', $pseudo: false, $retina: false);
