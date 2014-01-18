@@ -1,5 +1,7 @@
 @import "spriting";
 
+$retina-global: true;
+
 $social-icons: 'skype', 'gplus';
 @each $item in $social-icons {
   @include sprites($class: '.social-#{$item}', $name: $item) {
@@ -39,4 +41,4 @@ $social-icons: 'skype', 'gplus';
   left: 35px;
 }
 
-@include sprites($class: '.no-retina', $name: 'skype', $pseudo: false, $retina: false);
+@include sprites($class: '.no-retina', $name: 'skype', $pseudo: false);

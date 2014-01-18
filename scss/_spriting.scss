@@ -5,12 +5,14 @@ $retina-global: false !default;
 $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
 $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
 
+//test
 %comma-separated {
   @each $item in $icons-map {
     background: $m no-repeat;
   }
 }
 
+//test
 %comma-separated-retina {
   @each $item in $icons-map {
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {

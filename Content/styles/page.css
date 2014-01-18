@@ -3,20 +3,20 @@
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-  .social-skype:after, .social-gplus:after, .test-pseudo:after, .test-hover, .test-pseudo-hover:after, .other-test, .other-test-x, .other-test-y {
+  .social-skype:after, .social-gplus:after, .test-pseudo:after, .test-hover, .test-pseudo-hover:after, .other-test, .other-test-x, .other-test-y, .no-retina {
     background: url('images/icons@x2-s3b081ecf1c.png') no-repeat;
   }
 }
 
 .social-skype:after {
   content: "";
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
   background-position: 0 -96px;
   display: block;
   background-color: #f7f7f7;
   margin: 10px;
-  width: 32px;
-  height: 32px;
-  overflow: hidden;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
@@ -27,13 +27,13 @@
 }
 .social-gplus:after {
   content: "";
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
   background-position: 0 0;
   display: block;
   background-color: #f7f7f7;
   margin: 10px;
-  width: 32px;
-  height: 32px;
-  overflow: hidden;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
@@ -51,12 +51,12 @@
   position: absolute;
   top: 50%;
   margin-top: -16px;
-  background-position: 0 -96px;
-  display: block;
-  left: 0;
   width: 32px;
   height: 32px;
   overflow: hidden;
+  background-position: 0 -96px;
+  display: block;
+  left: 0;
 }
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
   .test-pseudo:after {
@@ -66,10 +66,10 @@
 }
 
 .test-hover {
-  background-position: 0 -64px;
   width: 32px;
   height: 32px;
   overflow: hidden;
+  background-position: 0 -64px;
 }
 .test-hover:hover {
   background-position: 0 -32px;
@@ -93,12 +93,12 @@
   position: absolute;
   top: 50%;
   margin-top: -16px;
-  background-position: 0 -64px;
-  display: block;
-  left: 0;
   width: 32px;
   height: 32px;
   overflow: hidden;
+  background-position: 0 -64px;
+  display: block;
+  left: 0;
 }
 .test-pseudo-hover:hover:after {
   background-position: 0 -32px;
@@ -108,7 +108,7 @@
     background-position: 0 -64px;
     background-size: 32px auto;
   }
-  .test-pseudo-hover:hover:after {
+  .test-pseudo-hover:after:hover:after {
     background-position: 0 -32px;
   }
 }
@@ -119,10 +119,10 @@
   left: 50%;
   margin-top: -16px;
   margin-left: -16px;
-  background-position: 0 0;
   width: 32px;
   height: 32px;
   overflow: hidden;
+  background-position: 0 0;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
@@ -135,11 +135,11 @@
   position: absolute;
   left: 50%;
   margin-left: -16px;
-  background-position: 0 0;
-  top: 0;
   width: 32px;
   height: 32px;
   overflow: hidden;
+  background-position: 0 0;
+  top: 0;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
@@ -152,11 +152,11 @@
   position: absolute;
   top: 50%;
   margin-top: -16px;
-  background-position: 0 0;
-  left: 35px;
   width: 32px;
   height: 32px;
   overflow: hidden;
+  background-position: 0 0;
+  left: 35px;
 }
 
 @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
@@ -166,8 +166,15 @@
   }
 }
 .no-retina {
-  background-position: 0 -96px;
   width: 32px;
   height: 32px;
   overflow: hidden;
+  background-position: 0 -96px;
+}
+
+@media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+  .no-retina {
+    background-position: 0 -96px;
+    background-size: 32px auto;
+  }
 }
