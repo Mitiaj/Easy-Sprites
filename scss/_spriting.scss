@@ -72,7 +72,6 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
   }
 }
 
-//TODO add ability to switch off comma-separated classes. "$comma-separated: true !default";
 @mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $pseudo: true, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
   $half: 50%;
   $h-name: $name + -hover;
