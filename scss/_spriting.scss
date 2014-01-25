@@ -199,10 +199,10 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
 }
 
 @if $comma-separated {
-  $games: scrabble, tetris, hearts;
+  $generated: test1, test2, test3;
   $classes: ();
-  @each $game in $games {
-    $classes: join($classes, unquote("#{class}"), comma) !global;
+  @each $item in $generated {
+    $classes: join($classes, unquote("#{$item}"), comma) !global;
   }
 
   #{$classes} {
