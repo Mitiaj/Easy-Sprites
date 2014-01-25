@@ -1,7 +1,9 @@
-SCSS-Helpers v0.3
+SCSS-Helpers v0.3.alpha.0.1
 =====================
 
-SCSS helpers for SASS/Compass
+Using:
+SASS 3.3.0.rc.2
+COMPASS 1.0.0.alpha17
 
 ###Config.rb
 While using this helper to generate sprite images configuration options should be aplied to your **config.rb** file (change path's to match your project).
