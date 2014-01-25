@@ -1,6 +1,6 @@
 @import "spriting";
 
-$retina-global: true;
+//$retina-global: true;
 
 $social-icons: 'skype', 'gplus';
 @each $item in $social-icons {

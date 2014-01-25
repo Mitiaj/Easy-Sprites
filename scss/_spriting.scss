@@ -1,25 +1,10 @@
 //TODO add ability to switch on/off comma-separated classes. somethink like "$comma-separated: true/false !default or !optional";
 $icons-map: 'icons' !default;
 $retina-global: false !default;
+$comma-separated: false !default;
 
 $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
 $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
-
-//test
-%comma-separated {
-  @each $item in $icons-map {
-    background: $m no-repeat;
-  }
-}
-
-//test
-%comma-separated-retina {
-  @each $item in $icons-map {
-    @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
-      background: $m-retina no-repeat;
-    }
-  }
-}
 
 @debug "#{$m} get image path for any screen except retina";
 @debug "#{$m-retina} get image path for retina screens";
@@ -79,7 +64,7 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
   }
 }
 
-@mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $pseudo: true, $size: true, $center: false, $center-y: false, $center-x: false, $comma: true) {
+@mixin sprites($class, $name, $hover: false, $active: false, $pseudo: true, $size: true, $center: false, $center-y: false, $center-x: false) {
   $half: 50%;
   $h-name: $name + -hover;
   $a-name: $name + -active;
@@ -98,9 +83,9 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
           overflow: hidden;
         }
 
-        @if $comma {
+        @if $comma-separated {
           background-position: position($m, $name);
-          @extend %comma-separated;
+          //@extend %comma-separated;
         } @else {
           background: $m no-repeat position($m, $name);
         }
@@ -134,9 +119,9 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
         overflow: hidden;
       }
 
-      @if $comma {
+      @if $comma-separated {
         background-position: position($m, $name);
-        @extend %comma-separated;
+        //@extend %comma-separated;
       } @else {
         background: $m no-repeat position($m, $name);
       }
@@ -161,9 +146,9 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
       @if $pseudo {
         #{$class} {
           &:after {
-            @if $comma {
+            @if $comma-separated {
               background-position: position-retina($m-retina, $name);
-              @extend %comma-separated-retina;
+              //@extend %comma-separated-retina;
             } @else {
               background: $m-retina no-repeat position-retina($m-retina, $name);
             }
@@ -188,9 +173,9 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
         }
       } @else {
         #{$class} {
-          @if $comma {
+          @if $comma-separated {
             background-position: position-retina($m-retina, $name);
-            @extend %comma-separated-retina;
+            //@extend %comma-separated-retina;
           } @else {
             background: $m-retina no-repeat position-retina($m-retina, $name);
           }
@@ -210,5 +195,17 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
         }
       }
     }
+  }
+}
+
+@if $comma-separated {
+  $games: scrabble, tetris, hearts;
+  $classes: ();
+  @each $game in $games {
+    $classes: join($classes, unquote("#{class}"), comma) !global;
+  }
+
+  #{$classes} {
+    background: $m-retina no-repeat;
   }
 }
