@@ -4,7 +4,10 @@ $retina-global: false !default;
 $comma-separated: false !default;
 
 $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
-$m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+
+@if $retina-global {
+  $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+}
 
 @debug "#{$m} get image path for any screen except retina";
 @debug "#{$m-retina} get image path for retina screens";
@@ -85,7 +88,6 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
 
         @if $comma-separated {
           background-position: position($m, $name);
-          //@extend %comma-separated;
         } @else {
           background: $m no-repeat position($m, $name);
         }
@@ -121,7 +123,6 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
 
       @if $comma-separated {
         background-position: position($m, $name);
-        //@extend %comma-separated;
       } @else {
         background: $m no-repeat position($m, $name);
       }
@@ -148,7 +149,6 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
           &:after {
             @if $comma-separated {
               background-position: position-retina($m-retina, $name);
-              //@extend %comma-separated-retina;
             } @else {
               background: $m-retina no-repeat position-retina($m-retina, $name);
             }
@@ -175,7 +175,6 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
         #{$class} {
           @if $comma-separated {
             background-position: position-retina($m-retina, $name);
-            //@extend %comma-separated-retina;
           } @else {
             background: $m-retina no-repeat position-retina($m-retina, $name);
           }
@@ -195,17 +194,5 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
         }
       }
     }
-  }
-}
-
-@if $comma-separated {
-  $generated: test1, test2, test3;
-  $classes: ();
-  @each $item in $generated {
-    $classes: join($classes, unquote("#{$item}"), comma) !global;
-  }
-
-  #{$classes} {
-    background: $m-retina no-repeat;
   }
 }
