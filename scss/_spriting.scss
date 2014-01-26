@@ -1,16 +1,7 @@
-//TODO add ability to switch on/off comma-separated classes. somethink like "$comma-separated: true/false !default or !optional";
+//TODO add ability to switch on/off comma-separated classes. somethink like "$comma-separated: true/false !default";
 $icons-map: 'icons' !default;
 $retina-global: false !default;
 $comma-separated: false !default;
-
-$m: sprite-map("#{$icons-map}/*.png", $layout: smart);
-
-@if $retina-global {
-  $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
-}
-
-@debug "#{$m} get image path for any screen except retina";
-@debug "#{$m-retina} get image path for retina screens";
 
 @function size-retina($m-retina) {
   @return ((ceil(image-width(sprite-path($m-retina)) / 2) auto));
@@ -68,6 +59,7 @@ $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
 }
 
 @mixin sprites($class, $name, $hover: false, $active: false, $pseudo: true, $size: true, $center: false, $center-y: false, $center-x: false) {
+  $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
   $half: 50%;
   $h-name: $name + -hover;
   $a-name: $name + -active;
@@ -143,6 +135,8 @@ $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
     }
   }
   @if $retina-global {
+    $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
       @if $pseudo {
         #{$class} {
@@ -196,3 +190,7 @@ $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
     }
   }
 }
+
+@debug "retina sprite map enabled: => #{$retina-global}";
+@debug "icons map folder: => #{$icons-map}";
+@debug "comma separated enabled: => #{$comma-separated}";
