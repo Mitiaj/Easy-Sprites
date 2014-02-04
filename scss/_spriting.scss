@@ -1,7 +1,6 @@
-//TODO add ability to switch on/off comma-separated classes. somethink like "$comma-separated: true/false !default";
 $icons-map: 'icons' !default;
-$retina-global: false !default;
-$comma-separated: false !default;
+$retina-sprite: false !default;
+//TODO implement $comma-separated: false !default;
 
 @function size-retina($m-retina) {
   @return ((ceil(image-width(sprite-path($m-retina)) / 2) auto));
@@ -65,23 +64,19 @@ $comma-separated: false !default;
   $a-name: $name + -active;
   $image-width: image-width(sprite-file($m, $name));
   $image-height: image-height(sprite-file($m, $name));
+  //TODO get variables with retina image sizes
 
   @if $pseudo {
     #{$class} {
       &:after {
         content: "";
+        background: $m no-repeat position($m, $name);
         @include _center($center, $half, $image-height, $image-width, $center-y, $center-x);
 
         @if $size {
           width: $image-width;
           height: $image-height;
           overflow: hidden;
-        }
-
-        @if $comma-separated {
-          background-position: position($m, $name);
-        } @else {
-          background: $m no-repeat position($m, $name);
         }
 
         @content;
@@ -105,18 +100,13 @@ $comma-separated: false !default;
     }
   } @else {
     #{$class} {
+      background: $m no-repeat position($m, $name);
       @include _center($center, $half, $image-height, $image-width, $center-y, $center-x);
 
       @if $size {
         width: $image-width;
         height: $image-height;
         overflow: hidden;
-      }
-
-      @if $comma-separated {
-        background-position: position($m, $name);
-      } @else {
-        background: $m no-repeat position($m, $name);
       }
 
       @content;
@@ -134,19 +124,17 @@ $comma-separated: false !default;
       }
     }
   }
-  @if $retina-global {
+  @if $retina-sprite {
     $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
 
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
       @if $pseudo {
         #{$class} {
           &:after {
-            @if $comma-separated {
-              background-position: position-retina($m-retina, $name);
-            } @else {
-              background: $m-retina no-repeat position-retina($m-retina, $name);
-            }
+            background: $m-retina no-repeat position-retina($m-retina, $name);
             background-size: size-retina($m-retina);
+            //TODO add with height and size feature to separate retina from basic icons ==>
+            //TODO so you can use any size of images for retina version not only x2 <==
 
             @if $hover {
               &:hover {
@@ -167,11 +155,7 @@ $comma-separated: false !default;
         }
       } @else {
         #{$class} {
-          @if $comma-separated {
-            background-position: position-retina($m-retina, $name);
-          } @else {
-            background: $m-retina no-repeat position-retina($m-retina, $name);
-          }
+          background: $m-retina no-repeat position-retina($m-retina, $name);
           background-size: size-retina($m-retina);
 
           @if $hover {
@@ -191,6 +175,17 @@ $comma-separated: false !default;
   }
 }
 
-@debug "retina sprite map enabled: => #{$retina-global}";
+//TODO test for comma separated implementation
+//$selector: ();
+//@each $item in $class {
+//  $selector: $selector, unquote('#{$class}');
+//}
+//
+//#{$selector} {
+//  background-position: position($m, $name);
+//  @debug "test: success;"
+//}
+
+@debug "retina sprite map enabled: => #{$retina-sprite}";
 @debug "icons map folder: => #{$icons-map}";
-@debug "comma separated enabled: => #{$comma-separated}";
+//TODO debug after implementation @debug "comma separated enabled: => #{$comma-separated}";

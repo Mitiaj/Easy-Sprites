@@ -1,7 +1,8 @@
 @import "spriting";
 
-//$retina-global: true;
-//$comma-separated: true;
+$retina-sprite: true;
+//TODO test after implementation $comma-separated: true;
+
 $social-icons: 'skype', 'gplus';
 @each $item in $social-icons {
   @include sprites($class: '.social-#{$item}', $name: $item) {
