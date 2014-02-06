@@ -2,6 +2,26 @@ $icons-map: 'icons' !default;
 $retina-sprite: false !default;
 //TODO implement $comma-separated: false !default;
 
+//@mixin tst {
+//  %comma-separated {
+//    $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
+//    @each $item in $icons-map {
+//      background: $m no-repeat;
+//    }
+//  }
+//}
+//
+//@mixin tst-r {
+//  %comma-separated-retina {
+//    $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+//    @each $item in $icons-map {
+//      @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
+//        background: $m-retina no-repeat;
+//      }
+//    }
+//  }
+//}
+
 @function size-retina($m-retina) {
   @return ((ceil(image-width(sprite-path($m-retina)) / 2) auto));
 }
@@ -44,16 +64,39 @@ $retina-sprite: false !default;
     position: absolute;
     top: $half;
     left: $half;
-    margin-top: -($image-height / 2);
-    margin-left: -($image-width / 2);
+    margin: {
+      top: -($image-height / 2);
+      left: -($image-width / 2);
+    }
   } @else if $center-y {
     position: absolute;
     top: $half;
-    margin-top: -($image-height / 2);
+    margin: {
+      top: -($image-height / 2);
+    }
   } @else if $center-x {
     position: absolute;
     left: $half;
-    margin-left: -($image-width / 2);
+    margin: {
+      left: -($image-width / 2);
+    }
+  }
+}
+
+@mixin _center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x) {
+  @if $center {
+    margin: {
+      top: -($retina-image-height / 2);
+      left: -($retina-image-width / 2);
+    }
+  } @else if $center-y {
+    margin: {
+      top: -($retina-image-height / 2);
+    }
+  } @else if $center-x {
+    margin: {
+      left: -($retina-image-width / 2);
+    }
   }
 }
 
@@ -73,10 +116,13 @@ $retina-sprite: false !default;
         background: $m no-repeat position($m, $name);
         @include _center($center, $half, $image-height, $image-width, $center-y, $center-x);
 
+        //        @if $comma-separated {
+        //          @include tst;
+        //        }
+
         @if $size {
           width: $image-width;
           height: $image-height;
-          overflow: hidden;
         }
 
         @content;
@@ -106,7 +152,6 @@ $retina-sprite: false !default;
       @if $size {
         width: $image-width;
         height: $image-height;
-        overflow: hidden;
       }
 
       @content;
@@ -126,15 +171,25 @@ $retina-sprite: false !default;
   }
   @if $retina-sprite {
     $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+    $retina-image-width: (image-width(sprite-file($m-retina, $name)) / 2);
+    $retina-image-height: (image-height(sprite-file($m-retina, $name)) / 2);
 
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
       @if $pseudo {
         #{$class} {
           &:after {
             background: $m-retina no-repeat position-retina($m-retina, $name);
+            //            @if $comma-separated {
+            //              @include tst-r;
+            //            }
+
             background-size: size-retina($m-retina);
-            //TODO add with height and size feature to separate retina from basic icons ==>
-            //TODO so you can use any size of images for retina version not only x2 <==
+            @include _center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
+
+            @if $size {
+              width: $retina-image-width;
+              height: $retina-image-height;
+            }
 
             @if $hover {
               &:hover {
@@ -157,6 +212,16 @@ $retina-sprite: false !default;
         #{$class} {
           background: $m-retina no-repeat position-retina($m-retina, $name);
           background-size: size-retina($m-retina);
+          @include _center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
+
+          //          @if $comma-separated {
+          //            @include tst-r;
+          //          }
+
+          @if $size {
+            width: $retina-image-width;
+            height: $retina-image-height;
+          }
 
           @if $hover {
             &:hover {
@@ -176,11 +241,13 @@ $retina-sprite: false !default;
 }
 
 //TODO test for comma separated implementation
+//$sprites-list: //TODO get classes list!;
+
 //$selector: ();
 //@each $item in $class {
 //  $selector: $selector, unquote('#{$class}');
 //}
-//
+
 //#{$selector} {
 //  background-position: position($m, $name);
 //  @debug "test: success;"
