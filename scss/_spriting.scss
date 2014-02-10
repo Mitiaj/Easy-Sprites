@@ -1,6 +1,7 @@
 $icons-map: 'icons' !default;
 $retina-sprite: false !default;
-//TODO implement $comma-separated: false !default;
+//TODO implement
+$comma-separated: false !default;
 
 //@mixin tst {
 //  %comma-separated {
@@ -100,6 +101,25 @@ $retina-sprite: false !default;
   }
 }
 
+@mixin _comma-separated($name) {
+  $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
+  @if $comma-separated {
+    background-position: position($m, $name);
+  } @else {
+    background: $m no-repeat position($m, $name);
+  }
+}
+
+@mixin _comma-separated-retina($name) {
+  $m-retina: sprite-map("#{$icons-map}/*.png", $layout: smart);
+  @if $comma-separated {
+    background-position: position($m-retina, $name);
+  } @else {
+    background: $m-retina no-repeat position($m-retina, $name);
+  }
+  background-size: size-retina($m-retina);
+}
+
 @mixin sprites($class, $name, $hover: false, $active: false, $pseudo: true, $size: true, $center: false, $center-y: false, $center-x: false) {
   $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
   $half: 50%;
@@ -113,12 +133,9 @@ $retina-sprite: false !default;
     #{$class} {
       &:after {
         content: "";
-        background: $m no-repeat position($m, $name);
         @include _center($center, $half, $image-height, $image-width, $center-y, $center-x);
 
-        //        @if $comma-separated {
-        //          @include tst;
-        //        }
+        @include _comma-separated($name);
 
         @if $size {
           width: $image-width;
@@ -146,8 +163,9 @@ $retina-sprite: false !default;
     }
   } @else {
     #{$class} {
-      background: $m no-repeat position($m, $name);
       @include _center($center, $half, $image-height, $image-width, $center-y, $center-x);
+
+      @include _comma-separated($name);
 
       @if $size {
         width: $image-width;
@@ -178,13 +196,9 @@ $retina-sprite: false !default;
       @if $pseudo {
         #{$class} {
           &:after {
-            background: $m-retina no-repeat position-retina($m-retina, $name);
-            //            @if $comma-separated {
-            //              @include tst-r;
-            //            }
-
-            background-size: size-retina($m-retina);
             @include _center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
+
+            @include _comma-separated-retina($name);
 
             @if $size {
               width: $retina-image-width;
@@ -210,13 +224,9 @@ $retina-sprite: false !default;
         }
       } @else {
         #{$class} {
-          background: $m-retina no-repeat position-retina($m-retina, $name);
-          background-size: size-retina($m-retina);
           @include _center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
 
-          //          @if $comma-separated {
-          //            @include tst-r;
-          //          }
+          @include _comma-separated-retina($name);
 
           @if $size {
             width: $retina-image-width;
@@ -240,18 +250,31 @@ $retina-sprite: false !default;
   }
 }
 
+@mixin sprite-any($name) {
+  $m: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+  background-position: position($m, $name);
+  @if $retina-sprite {
+    @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
+      $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+      background-position: position-retina($m-retina, $name);
+      background-size: size-retina($m-retina);
+    }
+  }
+}
+
+//$class: test, test2, test3;
+$class: ();
+@each $item in $class {
+  $class: $class, unquote('#{$class}');
+}
+
 //TODO test for comma separated implementation
-//$sprites-list: //TODO get classes list!;
-
-//$selector: ();
-//@each $item in $class {
-//  $selector: $selector, unquote('#{$class}');
+//#{$class} {
+//  $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
+//  background: $m no-repeat;
 //}
 
-//#{$selector} {
-//  background-position: position($m, $name);
-//  @debug "test: success;"
-//}
+//TODO get classes list!;
 
 @debug "retina sprite map enabled: => #{$retina-sprite}";
 @debug "icons map folder: => #{$icons-map}";
