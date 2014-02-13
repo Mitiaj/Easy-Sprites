@@ -1,6 +1,6 @@
 SCSS-Helpers v0.3.alpha.0.1
 =====================
-
+This version is not stable.
 Using:
 SASS 3.3.0.rc.2
 COMPASS 1.0.0.alpha17
@@ -16,6 +16,20 @@ sprite_load_path = "scss/images"
 relative_assets = true
 sprite_engine = :chunky_png
 chunky_png_options = :best_compression
+```
+###Spriting helper global options
+
+Default folder name is icons but you can change it.
+
+```scss
+$icons-map: 'icons'
+```
+
+Other options
+
+```scss
+$retina-sprite: true //bool
+$comma-separated: false //bool
 ```
 
 ###Spriting helper usage
@@ -35,13 +49,7 @@ Use $class option to add class name. When use pseudo elements for sprites, class
 ###Global Settings
 options and descriptions coming soon
 
-####Available options
-Default folder name is icons but you can change it or add more folders in **_spriting.scss** file (is't not recommended to use other mapping or separate folders for sprite images.)
-
-```scss
-$icons-map: icons
-```
-
+####Available local options
 You can enable hover and active states, just add image to icons folder and add **-hover** or **-active** to your image name
 
 ```scss
@@ -59,12 +67,6 @@ By default I've enabled element size to true which set's width and height to act
 
 ```scss
 $size: true //bool
-```
-
-If you don't need to generate sprites for retina screens don't create **icons@x2** folder and set it to false.
-
-```scss
-$retina: true //bool
 ```
 
 By default centering is set to false if you need to center your image to x, y or both axis use this options.
