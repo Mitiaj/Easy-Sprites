@@ -1,5 +1,10 @@
 @import "spriting";
 
+$retina-sprite: true;
+//@include comma-separated;
+
+//TODO test after implementation $comma-separated: true;
+
 $social-icons: 'skype', 'gplus';
 @each $item in $social-icons {
   @include sprites($class: '.social-#{$item}', $name: $item) {
@@ -11,7 +16,9 @@ $social-icons: 'skype', 'gplus';
 
 .test-pseudo {
   position: relative;
-  padding-left: 40px;
+  padding: {
+    left: 40px;
+  }
   @include sprites($class: '&', $name: 'skype', $center-y: true) {
     display: block;
     left: 0;
@@ -22,7 +29,9 @@ $social-icons: 'skype', 'gplus';
 
 .test-pseudo-hover {
   position: relative;
-  padding-left: 50px;
+  padding: {
+    left: 50px;
+  }
   @include sprites($class: '&', $name: 'imgclock', $center-y: true, $hover: true) {
     display: block;
     left: 0;
@@ -39,4 +48,4 @@ $social-icons: 'skype', 'gplus';
   left: 35px;
 }
 
-@include sprites($class: '.no-retina', $name: 'skype', $pseudo: false, $retina: false);
+@include sprites($class: '.no-retina', $name: 'skype', $pseudo: false);

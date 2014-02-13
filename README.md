@@ -1,7 +1,9 @@
-SCSS-Helpers v0.2
+SCSS-Helpers v0.3.alpha.0.1
 =====================
 
-SCSS helpers for SASS/Compass
+Using:
+SASS 3.3.0.rc.2
+COMPASS 1.0.0.alpha17
 
 ###Config.rb
 While using this helper to generate sprite images configuration options should be aplied to your **config.rb** file (change path's to match your project).
@@ -29,6 +31,9 @@ Use $class option to add class name. When use pseudo elements for sprites, class
 @include($class: '&', $name:'image-name') //if adding inside class as a module with $pseudo:true
 @include($class: '.class-name', $name:'image-name', $pseudo: false) //if adding as standalone class or selector within a module
 ```
+
+###Global Settings
+options and descriptions coming soon
 
 ####Available options
 Default folder name is icons but you can change it or add more folders in **_spriting.scss** file (is't not recommended to use other mapping or separate folders for sprite images.)

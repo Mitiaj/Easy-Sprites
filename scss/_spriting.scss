@@ -1,21 +1,18 @@
+@import "sprite-func";
+
 $icons-map: 'icons' !default;
+$retina-sprite: false !default;
+//TODO implement
+$comma-separated: true !default;
 
-$m: sprite-map("#{$icons-map}/*.png", $layout: smart);
-$m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
-
-%comma-separated {
-  @each $item in $icons-map {
-    background: $m no-repeat;
-  }
-}
-
-%comma-separated-retina {
-  @each $item in $icons-map {
-    @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
-      background: $m-retina no-repeat;
-    }
-  }
-}
+//  %comma-separated-retina {
+//    $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+//    @each $item in $icons-map {
+//      @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
+//        background: $m-retina no-repeat;
+//      }
+//    }
+//  }
 
 @function size-retina($m-retina) {
   @return ((ceil(image-width(sprite-path($m-retina)) / 2) auto));
@@ -59,20 +56,63 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
     position: absolute;
     top: $half;
     left: $half;
-    margin-top: -($image-height / 2);
-    margin-left: -($image-width / 2);
+    margin: {
+      top: -($image-height / 2);
+      left: -($image-width / 2);
+    }
   } @else if $center-y {
     position: absolute;
     top: $half;
-    margin-top: -($image-height / 2);
+    margin: {
+      top: -($image-height / 2);
+    }
   } @else if $center-x {
     position: absolute;
     left: $half;
-    margin-left: -($image-width / 2);
+    margin: {
+      left: -($image-width / 2);
+    }
   }
 }
 
-@mixin sprites($class, $name, $icons-map: icons, $hover: false, $active: false, $pseudo: true, $size: true, $retina: true, $center: false, $center-y: false, $center-x: false) {
+@mixin _center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x) {
+  @if $center {
+    margin: {
+      top: -($retina-image-height / 2);
+      left: -($retina-image-width / 2);
+    }
+  } @else if $center-y {
+    margin: {
+      top: -($retina-image-height / 2);
+    }
+  } @else if $center-x {
+    margin: {
+      left: -($retina-image-width / 2);
+    }
+  }
+}
+
+@mixin _comma-separated($name) {
+  $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
+  @if $comma-separated {
+    background-position: position($m, $name);
+  } @else {
+    background: $m no-repeat position($m, $name);
+  }
+}
+
+@mixin _comma-separated-retina($name) {
+  $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+  @if $comma-separated {
+    background-position: position($m-retina, $name);
+  } @else {
+    background: $m-retina no-repeat position($m-retina, $name);
+  }
+  background-size: size-retina($m-retina);
+}
+
+@mixin sprites($class, $name, $hover: false, $active: false, $pseudo: true, $size: true, $center: false, $center-y: false, $center-x: false) {
+  $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
   $half: 50%;
   $h-name: $name + -hover;
   $a-name: $name + -active;
@@ -84,15 +124,15 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
       &:after {
         content: "";
         @include _center($center, $half, $image-height, $image-width, $center-y, $center-x);
-        background-position: position($m, $name);
-        @content;
-        @extend %comma-separated;
+
+        @include _comma-separated($name);
 
         @if $size {
           width: $image-width;
           height: $image-height;
-          overflow: hidden;
         }
+
+        @content;
       }
 
       @if $hover {
@@ -114,15 +154,15 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
   } @else {
     #{$class} {
       @include _center($center, $half, $image-height, $image-width, $center-y, $center-x);
-      background-position: position($m, $name);
-      @content;
-      @extend %comma-separated;
+
+      @include _comma-separated($name);
 
       @if $size {
         width: $image-width;
         height: $image-height;
-        overflow: hidden;
       }
+
+      @content;
 
       @if $hover {
         &:hover {
@@ -137,38 +177,51 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
       }
     }
   }
+  @if $retina-sprite {
+    $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+    $retina-image-width: (image-width(sprite-file($m-retina, $name)) / 2);
+    $retina-image-height: (image-height(sprite-file($m-retina, $name)) / 2);
 
-  @if $retina {
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
       @if $pseudo {
         #{$class} {
           &:after {
-            @extend %comma-separated-retina;
-            background-position: position-retina($m-retina, $name);
-            background-size: size-retina($m-retina);
-          }
+            @include _center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
 
-          @if $hover {
-            &:hover {
-              &:after {
-                background-position: position-retina($m-retina, $h-name);
+            @include _comma-separated-retina($name);
+
+            @if $size {
+              width: $retina-image-width;
+              height: $retina-image-height;
+            }
+
+            @if $hover {
+              &:hover {
+                &:after {
+                  background-position: position-retina($m-retina, $h-name);
+                }
               }
             }
-          }
 
-          @if $active {
-            &:active {
-              &:after {
-                background-position: position-retina($m-retina, $a-name);
+            @if $active {
+              &:active {
+                &:after {
+                  background-position: position-retina($m-retina, $a-name);
+                }
               }
             }
           }
         }
       } @else {
         #{$class} {
-          @extend %comma-separated-retina;
-          background-position: position-retina($m-retina, $name);
-          background-size: size-retina($m-retina);
+          @include _center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
+
+          @include _comma-separated-retina($name);
+
+          @if $size {
+            width: $retina-image-width;
+            height: $retina-image-height;
+          }
 
           @if $hover {
             &:hover {
@@ -186,3 +239,40 @@ $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
     }
   }
 }
+
+//TODO get classes list from mixin argument!;
+$class-list: '.test', '.set', '.get';
+
+//$class-list:;
+
+@mixin _spritesd($class, $name) {
+  @include sprites($class, $name) {
+  }
+}
+
+@if $comma-separated {
+
+  $global-class: ();
+
+  @each $item in $class-list {
+    $global-class: append($global-class, unquote($item), comma);
+  }
+
+  #{$global-class} {
+    $m: sprite-map("#{$icons-map}/*.png", $layout: smart);
+    background: $m no-repeat;
+  }
+
+  @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
+    #{$global-class} {
+      $m-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+      background: $m-retina no-repeat;
+    }
+  }
+
+}
+
+@debug "retina sprite map enabled: => #{$retina-sprite}";
+@debug "icons map folder: => #{$icons-map}";
+@debug "comma separated enabled: => #{$comma-separated}";
+//@warn #{sprite-map-name('icons')};
