@@ -50,11 +50,10 @@ Use $class option to add class name. When use pseudo elements for sprites, class
 options and descriptions coming soon
 
 ####Available local options
-You can enable hover and active states, just add image to icons folder and add **-hover** or **-active** to your image name
+You can enable hover state, just add image to icons folder and attach **-hover** to your image name.
 
 ```scss
 $hover: false //bool
-$active: false //bool
 ```
 
 By default sprite images is enabled for pseudo elements
