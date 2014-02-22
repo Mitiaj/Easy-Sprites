@@ -1,9 +1,12 @@
 SCSS-Helpers v0.3.alpha.0.1
 =====================
-This version is not stable.
+This version is not stable version, for production please use latest: [Stable Version][1].
+[1]: https://github.com/paulgabronis/SCSS-Helpers/releases
+
+
 Using:
-SASS 3.3.0.rc.2
-COMPASS 1.0.0.alpha17
+SASS 3.3.0.rc.3
+COMPASS 1.0.0.alpha18
 
 ###Config.rb
 While using this helper to generate sprite images configuration options should be aplied to your **config.rb** file (change path's to match your project).
@@ -74,15 +77,4 @@ By default centering is set to false if you need to center your image to x, y or
 $center: false //bool
 $center-y: false //bool
 $center-x: false //bool
-```
-
-###Legend
-Helper variables explain.
-
-```scss
-$h-name == hover state
-$a-name == active state
-$s-name == default state
-$m == default map
-$m-retina == retina map
 ```
