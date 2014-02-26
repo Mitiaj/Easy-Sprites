@@ -2,6 +2,7 @@ $icons-map: 'icons' !default;
 $retina-sprite: true !default;
 $comma-separated: true !default;
 
+//TODO add ability to have only one 'icons' folder, do not required icons@x2
 @if $comma-separated {
   %comma-separated {
     $map: sprite-map("#{$icons-map}/*.png", $layout: smart);
