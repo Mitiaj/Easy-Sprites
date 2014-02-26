@@ -9,7 +9,7 @@ $comma-separated: true !default;
       background: $map no-repeat;
     }
   }
-  
+
   %comma-separated-retina {
     $map-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
     @each $item in $icons-map {

@@ -20,39 +20,30 @@ relative_assets = true
 sprite_engine = :chunky_png
 chunky_png_options = :best_compression
 ```
-###Spriting helper global options
+###Global options
 
-Default folder name is icons but you can change it.
+Default folder name is icons but you can change it (if using retina images don't forget to create **icons@x2** folder).
 
 ```scss
 $icons-map: 'icons'
-```
-
-Other options
-
-```scss
 $retina-sprite: true //bool
 $comma-separated: false //bool
 ```
 
 ###Spriting helper usage
-Here is a mixin options which you can use while generating sprite images.
 Copy **_spriting.scss** to your project directory and **@import** it to your main **.scss** file.
 Create two folders in your choosen scss images folder. For example I've created **icons** folder for standard images and **icons@x2** for x2 bigger images for retina screens.
 **Make sure that retina images are divisible by 4 or at least 2**. If they are not, this can lead to background position shifting.
 
-In your main **.scss** file create **@include** with options to generate sprite images.
-Use $class option to add class name. When use pseudo elements for sprites, class name should be set accordingly.
+In your main **.scss** file add **@include** directive with choosen options to generate sprite images.
+$class and $name options is nessesary. When use pseudo classes for sprites, class name should be **'&'**.
 
+###Local options which can be used while generating sprite images.
 ```scss
 @include($class: '&', $name:'image-name') //if adding inside class as a module with $pseudo:true
 @include($class: '.class-name', $name:'image-name', $pseudo: false) //if adding as standalone class or selector within a module
 ```
 
-###Global Settings
-options and descriptions coming soon
-
-####Available local options
 You can enable hover state, just add image to icons folder and attach **-hover** to your image name.
 
 ```scss
@@ -65,13 +56,13 @@ By default sprite images is enabled for pseudo elements
 $pseudo: true //bool
 ```
 
-By default I've enabled element size to true which set's width and height to actual source image size if you don't need it for any reason you can set it to false.
+By default element size is set to true it applies width and height from actual source image, if you don't need them for any reason you can set it to false.
 
 ```scss
 $size: true //bool
 ```
 
-By default centering is set to false if you need to center your image to x, y or both axis use this options.
+By default centering is set to false if you need to center your image to x, y or both axis use one of these options.
 
 ```scss
 $center: false //bool
