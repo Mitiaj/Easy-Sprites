@@ -1,4 +1,4 @@
-SCSS-Helpers v0.3.alpha.0.1
+SCSS-Helpers v0.3.beta.1
 =====================
 This version is not stable version, for production please use latest: [Stable Version][1].
 [1]: https://github.com/paulgabronis/SCSS-Helpers/releases
