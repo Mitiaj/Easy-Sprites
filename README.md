@@ -26,8 +26,8 @@ Default folder name is icons but you can change it (if using retina images don't
 
 ```scss
 $icons-map: 'icons'
-$retina-sprite: true //bool
-$comma-separated: false //bool
+$retina-sprite: null //bool
+$comma-separated: true //bool
 ```
 
 ###Spriting helper usage
@@ -40,8 +40,17 @@ $class and $name options is nessesary. When use pseudo classes for sprites, clas
 
 ###Local options which can be used while generating sprite images.
 ```scss
-@include($class: '&', $name:'image-name') //if adding inside class as a module with $pseudo:true
-@include($class: '.class-name', $name:'image-name', $pseudo: false) //if adding as standalone class or selector within a module
+@include sprites($class: '&', $name:'icon-name') //if adding inside class as a module with $pseudo:true
+@include sprites($class: '.class-name', $name:'icon-name', $pseudo: false) //if adding as standalone class or selector within a module
+@include sprites-states($name:'active-icon') //add this mixin into sprite class if you need any additional states for your icons i.e. active, opened etc...
+```
+if additional states needs to be added your code should look like this:
+```scss
+@include sprites($class: '.my-class', $name:'icon-name'){
+  &.active{
+    @include sprites-states($name:'active-icon')
+  }
+}
 ```
 
 You can enable hover state, just add image to icons folder and attach **-hover** to your image name.
