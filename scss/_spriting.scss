@@ -30,17 +30,17 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   }
 }
 
-@function position-retina($map, $name: false, $hover-name: false) {
+@function position-retina($map-retina, $name: false, $hover-name: false) {
   @if $name {
     @return (
-    round(nth(sprite-position($map, $name), 1) / 2)
-    round(nth(sprite-position($map, $name), 2) / 2)
+    round(nth(sprite-position($map-retina, $name), 1) / 2)
+    round(nth(sprite-position($map-retina, $name), 2) / 2)
     );
   }
   @if $hover-name {
     @return (
-    round(nth(sprite-position($map, $hover-name), 1) / 2)
-    round(nth(sprite-position($map, $hover-name), 2) / 2)
+    round(nth(sprite-position($map-retina, $hover-name), 1) / 2)
+    round(nth(sprite-position($map-retina, $hover-name), 2) / 2)
     );
   }
 }
@@ -215,7 +215,6 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
       }
     }
   }
-
 }
 
 @mixin sprites-states($name) {
