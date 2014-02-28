@@ -1,18 +1,18 @@
 $icons-map: 'icons' !default;
-$retina-sprite: true !default;
+$retina-sprite: null !default;
 $comma-separated: true !default;
+
+$map: sprite-map("#{$icons-map}/*.png", $layout: smart);
+$map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $layout: smart), null);
 
 //TODO add ability to have only one 'icons' folder, do not required icons@x2
 @if $comma-separated {
   %comma-separated {
-    $map: sprite-map("#{$icons-map}/*.png", $layout: smart);
     @each $item in $icons-map {
       background: $map no-repeat;
     }
   }
-
   %comma-separated-retina {
-    $map-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
     @each $item in $icons-map {
       @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
         background: $map-retina no-repeat;
@@ -91,7 +91,6 @@ $comma-separated: true !default;
 }
 
 @mixin sprites($class, $name, $hover: false, $pseudo: true, $size: true, $center: false, $center-y: false, $center-x: false) {
-  $map: sprite-map("#{$icons-map}/*.png", $layout: smart);
   $half: 50%;
   $hover-name: $name + -hover;
   $image-width: image-width(sprite-file($map, $name));
@@ -155,10 +154,8 @@ $comma-separated: true !default;
   }
 
   @if $retina-sprite {
-    $map-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
-    $retina-image-width: (image-width(sprite-file($map-retina, $name)) / 2);
-    $retina-image-height: (image-height(sprite-file($map-retina, $name)) / 2);
-
+    $retina-image-width: if($retina-sprite == true, (image-width(sprite-file($map-retina, $name)) / 2), null);
+    $retina-image-height: if($retina-sprite == true, (image-height(sprite-file($map-retina, $name)) / 2), null);
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
       @if $pseudo {
         #{$class} {
@@ -220,13 +217,10 @@ $comma-separated: true !default;
 
 }
 
-//TODO find better implementation of adding any icon i.e. .active or opened state
-@mixin sprite-state($name) {
-  $map: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
+@mixin sprites-states($name) {
   background-position: position($map, $name);
   @if $retina-sprite {
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
-      $map-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
       background-position: position-retina($map-retina, $name);
       background-size: size-retina($map-retina);
     }
@@ -236,3 +230,5 @@ $comma-separated: true !default;
 @debug "icons map folder: => #{$icons-map}";
 @debug "retina sprite map enabled: => #{$retina-sprite}";
 @debug "comma separated enabled: => #{$comma-separated}";
+@debug "sprites map => #{$map}";
+@debug "sprites map for retina => #{$map-retina}";

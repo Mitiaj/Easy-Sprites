@@ -1,7 +1,7 @@
 @import "spriting";
 
 $retina-sprite: true;
-$comma-separated: true;
+$comma-separated: null;
 
 $social-icons: 'skype', 'gplus';
 @each $item in $social-icons {
@@ -11,6 +11,10 @@ $social-icons: 'skype', 'gplus';
     margin: 10px;
   }
 }
+
+
+
+
 
 .test-pseudo {
   position: relative;
