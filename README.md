@@ -3,6 +3,7 @@ SCSS-Helpers v0.3.beta.1
 This version is not stable version, for production please use latest: [Stable Version][1].
 [1]: https://github.com/paulgabronis/SCSS-Helpers/releases
 
+[![Build Status](https://travis-ci.org/paulgabronis/SCSS-Helpers.png?branch=master)](https://travis-ci.org/paulgabronis/SCSS-Helpers)
 
 Using:
 SASS 3.3.0.rc.5
