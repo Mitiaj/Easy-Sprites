@@ -1,7 +1,7 @@
 script:
- - "test/travis.rb"
+ - "travis.rb"
 
 language: sass
 before_install:
- - gem install sass --pre
+ - gem install sass
  - gem install compass --pre

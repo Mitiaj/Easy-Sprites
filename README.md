@@ -1,4 +1,4 @@
-SCSS-Helpers v0.3.beta.1
+SCSS-Helpers v0.3.beta.2
 =====================
 This version is not stable version, for production please use latest: [Stable Version][1].
 [1]: https://github.com/paulgabronis/SCSS-Helpers/releases
@@ -6,7 +6,7 @@ This version is not stable version, for production please use latest: [Stable Ve
 [![Build Status](https://travis-ci.org/paulgabronis/SCSS-Helpers.png?branch=master)](https://travis-ci.org/paulgabronis/SCSS-Helpers)
 
 Using:
-SASS 3.3.0.rc.5
+SASS 3.3.0
 COMPASS 1.0.0.alpha18
 
 ###Config.rb
