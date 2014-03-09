@@ -1,11 +1,14 @@
-SCSS-Helpers v0.3.rc.1
+SCSS-Helpers v0.3.rc.2
 =====================
 This version is not stable version, for production please use latest: [Stable Version][1].
 [1]: https://github.com/paulgabronis/SCSS-Helpers/releases
 
-Using:
-SASS 3.3.0
-COMPASS 1.0.0.alpha18
+Dependencies:
+
+|Name    |Version      |
+|--------|-------------|
+|SASS    |3.3.0        |
+|COMPASS |1.0.0.alpha18|
 
 ###Config.rb
 While using this helper to generate sprite images configuration options should be aplied to your **config.rb** file (change path's to match your project).
