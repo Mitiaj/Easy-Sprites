@@ -1,16 +1,17 @@
-SCSS-Helpers v0.3.rc.2
+SCSS-Helpers v0.4
 =====================
-This version is not stable version, for production please use latest: [Stable Version][1].
+For production please use latest [stable Version][1].
 [1]: https://github.com/paulgabronis/SCSS-Helpers/releases
 
-Dependencies:
+####Dependencies
+_please note this helper will not work with lower versions of sass and compass framework_
 
-|Name    |Version      |
-|--------|-------------|
-|SASS    |3.3.0        |
-|COMPASS |1.0.0.alpha18|
+|Name    |Version         |
+|:-------|---------------:|
+|SASS    |`3.3.0`         |
+|COMPASS |`1.0.0.alpha18` |
 
-###Config.rb
+###Configuration
 While using this helper to generate sprite images configuration options should be aplied to your **config.rb** file (change path's to match your project).
 
 ```ruby
@@ -48,7 +49,7 @@ $comma-separated: true //by default is set to true if you don't want comma-separ
 @include sprites($class: '.class-name', $name:'icon-name', $pseudo: false) //if adding as standalone class or selector within a module
 @include sprites-states($name:'active-icon') //add this mixin into sprite class if you need any additional states for your icons i.e. active, opened etc...
 ```
-if additional states needs to be added, your code should look like this:
+_if additional states needs to be added, your code should look like this:_
 ```scss
 .my-class{
   &.active{
@@ -66,7 +67,7 @@ You can enable hover state, just add image to icons folder and attach **-hover**
 $hover: false //bool
 ```
 
-By default sprite images is enabled for pseudo elements
+By default sprite images is enabled to use with pseudo classes/elements
 
 ```scss
 $pseudo: true //bool

@@ -1,3 +1,5 @@
+//Created by Paul G. ©SCSS-Helpers v0.4
+//https://github.com/paulgabronis/SCSS-Helpers
 $icons-map: 'icons' !default;
 $retina-sprite: false !default;
 $comma-separated: true !default;
@@ -240,7 +242,7 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   }
 }
 
-@debug "icons map folder: => #{$icons-map}";
+@debug "icons map folder name: => #{$icons-map}";
 @debug "retina sprite map enabled: => #{$retina-sprite}";
 @debug "comma separated enabled: => #{$comma-separated}";
 @debug "generated sprite map => #{$map}";
