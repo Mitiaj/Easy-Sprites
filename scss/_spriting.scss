@@ -220,12 +220,23 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   }
 }
 
-@mixin sprites-states($name) {
-  background-position: background($map, $name);
+@mixin sprites-states($name, $pseudo: true) {
+  @if $pseudo {
+    &:after {
+      background-position: background($map, $name);
+    }
+  } @else {
+    background-position: background($map, $name);
+  }
   @if $retina-sprite {
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
-      background-position: background-retina($map-retina, $name);
-      background-size: size-retina($map-retina);
+      @if $pseudo {
+        &:after {
+          background-position: background-retina($map-retina, $name);
+        }
+      } @else {
+        background-position: background-retina($map-retina, $name);
+      }
     }
   }
 }

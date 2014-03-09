@@ -1,4 +1,4 @@
-SCSS-Helpers v0.3.beta.2
+SCSS-Helpers v0.3.beta.3
 =====================
 This version is not stable version, for production please use latest: [Stable Version][1].
 [1]: https://github.com/paulgabronis/SCSS-Helpers/releases
@@ -47,13 +47,15 @@ $comma-separated: true //by default is set to true if you don't want comma-separ
 @include sprites($class: '.class-name', $name:'icon-name', $pseudo: false) //if adding as standalone class or selector within a module
 @include sprites-states($name:'active-icon') //add this mixin into sprite class if you need any additional states for your icons i.e. active, opened etc...
 ```
-if additional states needs to be added your code should look like this:
+if additional states needs to be added, your code should look like this:
 ```scss
-@include sprites($class: '.my-class', $name:'icon-name'){
+.my-class{
   &.active{
     @include sprites-states($name:'active-icon')
   }
 }
+//it also contains local variable:
+$pseudo: true //set to false if your parent class is not a pseudo class.
 ```
 
 ###List of local options

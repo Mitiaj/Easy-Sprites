@@ -45,4 +45,10 @@ $social-icons: 'skype', 'gplus';
   left: 35px;
 }
 
-@include sprites($class: '.no-retina', $name: 'skype', $pseudo: false);
+@include sprites($class: '.test-class', $name: 'skype', $center: true);
+
+.test-class {
+  &.active {
+    @include sprites-states($name: 'imgclock');
+  }
+}
