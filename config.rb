@@ -4,7 +4,7 @@
 http_path = "/"
 
 css_dir = "/Content/Styles"
-sass_dir = "/"
+sass_dir = "scss"
 images_dir = "/Content/Styles/images"
 
 sprite_load_path = "scss/images"
