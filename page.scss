@@ -1,6 +1,7 @@
 $retina-sprite: true;
 $comma-separated: true;
-@import "spriting";
+@import "scss/spriting";
+
 
 $social-icons: 'skype', 'gplus';
 @each $item in $social-icons {
