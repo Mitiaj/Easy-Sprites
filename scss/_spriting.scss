@@ -3,7 +3,7 @@ $retina-sprite: false !default;
 $comma-separated: true !default;
 
 $map: sprite-map("#{$icons-map}/*.png", $layout: smart);
-$map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $layout: smart), null);
+$map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $layout: smart), false);
 
 @if $comma-separated {
   %comma-separated {
@@ -153,7 +153,6 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   }
 
   @if $retina-sprite {
-    $map-retina: sprite-map("#{$icons-map}@x2/*.png", $layout: smart);
     $retina-image-width: (image-width(sprite-file($map-retina, $name)) / 2);
     $retina-image-height: (image-height(sprite-file($map-retina, $name)) / 2);
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
