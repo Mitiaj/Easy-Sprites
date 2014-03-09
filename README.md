@@ -21,23 +21,25 @@ relative_assets = true
 sprite_engine = :chunky_png
 chunky_png_options = :best_compression
 ```
-###Global options
-
-Default folder name is icons but you can change it (if using retina images don't forget to create **icons@x2** folder).
-
-```scss
-$icons-map: 'icons'
-$retina-sprite: null //bool
-$comma-separated: true //bool
-```
 
 ###Spriting helper usage
 Copy **_spriting.scss** to your project directory and **@import** it to your main **.scss** file.
-Create two folders in your choosen scss images folder. For example I've created **icons** folder for standard images and **icons@x2** for x2 bigger images for retina screens.
-**Make sure that retina images are divisible by 4 or at least 2**. If they are not, this can lead to background position shifting.
+Create two folders in scss images folder. For example I've created **icons** folder for standard images and **icons@x2** for x2 bigger images for retina screens.
+**Make sure that retina images are divisible by 4 or at least 2**. If they are not, this can lead to background position shifting and wrong background positioning for retina screens.
 
 In your main **.scss** file add **@include** directive with choosen options to generate sprite images.
 $class and $name options is nessesary. When use pseudo classes for sprites, class name should be **'&'**.
+
+###Global options
+Default folder name is icons but you can change it (if using retina images don't forget to create **icons@x2** folder).
+Also those options should be placed above **@import "spriting"** just like that:
+
+```scss
+$icons-map: 'icons' //optional! if you keep folder name "icons"
+$retina-sprite: false //by default retina spriting if set to false
+$comma-separated: true //by default is set to true if you don't want comma-separated classes set it to false
+@import "spriting";
+```
 
 ###Local options which can be used while generating sprite images.
 ```scss
@@ -54,6 +56,7 @@ if additional states needs to be added your code should look like this:
 }
 ```
 
+###List of local options
 You can enable hover state, just add image to icons folder and attach **-hover** to your image name.
 
 ```scss
