@@ -9,10 +9,10 @@ _please note this helper will not work with lower versions of sass and compass f
 |Name    |Version         |
 |:-------|---------------:|
 |SASS    |`3.3.0`         |
-|COMPASS |`1.0.0.alpha18` |
+|COMPASS |`1.0.0.alpha19` |
 
 ###Configuration
-While using this helper to generate sprite images configuration options should be aplied to your **config.rb** file (change path's to match your project).
+While using this helper to generate sprite images, configuration options should be applied to your **config.rb** file (adjust path's to match your project).
 
 ```ruby
 css_dir = "/Content/Styles"

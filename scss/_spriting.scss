@@ -1,5 +1,5 @@
-//Created by Paul G. ©SCSS-Helpers v0.3
-//https://github.com/paulgabronis/SCSS-Helpers
+//Created by Paul G. Easy Sprites v0.4.beta.1
+//https://github.com/paulgabronis/Easy-Sprites
 $icons-map: 'icons' !default;
 $retina-sprite: false !default;
 $comma-separated: true !default;
@@ -98,13 +98,13 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
 
   @if $pseudo {
     #{$class} {
-      &:after {
+      &:before {
         content: "";
         @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
         @if $comma-separated {
           background-position: background($map, $name);
 
-          @at-root #{$class}:after {
+          @at-root #{$class}:before {
             @extend %comma-separated;
           }
 
@@ -120,7 +120,7 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
       }
       @if $hover {
         &:hover {
-          &:after {
+          &:before {
             background-position: background($map, $hover-name);
           }
         }
@@ -160,12 +160,12 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
       @if $pseudo {
         #{$class} {
-          &:after {
+          &:before {
             @include center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
             @if $comma-separated {
               background-position: background-retina($map-retina, $name);
 
-              @at-root #{$class}:after {
+              @at-root #{$class}:before {
                 @extend %comma-separated-retina;
               }
 
@@ -181,7 +181,7 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
 
             @if $hover {
               &:hover {
-                &:after {
+                &:before {
                   background-position: background-retina($map-retina, $hover-name);
                 }
               }
@@ -223,7 +223,7 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
 
 @mixin sprites-states($name, $pseudo: true) {
   @if $pseudo {
-    &:after {
+    &:before {
       background-position: background($map, $name);
     }
   } @else {
@@ -232,7 +232,7 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   @if $retina-sprite {
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
       @if $pseudo {
-        &:after {
+        &:before {
           background-position: background-retina($map-retina, $name);
         }
       } @else {
