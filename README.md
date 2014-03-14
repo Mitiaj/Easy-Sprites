@@ -1,7 +1,7 @@
-SCSS-Helpers v0.3
+Easy Sprites v0.3
 =====================
 For production please use latest [stable Version][1].
-[1]: https://github.com/paulgabronis/SCSS-Helpers/releases
+[1]: https://github.com/paulgabronis/Easy-Sprites/releases
 
 ####Dependencies
 _please note this helper will not work with lower versions of sass and compass framework_
