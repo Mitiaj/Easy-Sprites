@@ -1,4 +1,4 @@
-Easy Sprites v0.3
+Easy Sprites v0.4.beta.1
 =====================
 For production please use latest [stable Version][1].
 [1]: https://github.com/paulgabronis/Easy-Sprites/releases
@@ -15,6 +15,7 @@ _please note this helper will not work with lower versions of sass and compass f
 While using this helper to generate sprite images, configuration options should be applied to your **config.rb** file (adjust path's to match your project).
 
 ```ruby
+dir = File.dirname(__FILE__)
 css_dir = "/Content/Styles"
 sass_dir = "scss"
 images_dir = "/Content/Styles/images"
