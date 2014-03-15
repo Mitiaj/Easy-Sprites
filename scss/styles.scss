@@ -1,0 +1,7 @@
+@import "page";
+
+@debug "icons map folder name: => #{$icons-map}";
+@debug "retina sprite map enabled: => #{$retina-sprite}";
+@debug "comma separated enabled: => #{$comma-separated}";
+@debug "generated sprite map => #{$map}";
+@debug "generated sprite map for retina => #{$map-retina}";

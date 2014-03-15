@@ -1,4 +1,4 @@
-Easy Sprites v0.4.beta.1
+Easy Sprites v0.4.2
 =====================
 For production please use latest [stable Version][1].
 [1]: https://github.com/paulgabronis/Easy-Sprites/releases
@@ -10,20 +10,6 @@ _please note this helper will not work with lower versions of sass and compass f
 |:-------|---------------:|
 |SASS    |`3.3.0`         |
 |COMPASS |`1.0.0.alpha19` |
-
-###Configuration
-While using this helper to generate sprite images, configuration options should be applied to your **config.rb** file (adjust path's to match your project).
-
-```ruby
-dir = File.dirname(__FILE__)
-css_dir = "/Content/Styles"
-sass_dir = "scss"
-images_dir = "/Content/Styles/images"
-sprite_load_path = "scss/images"
-relative_assets = true
-sprite_engine = :chunky_png
-chunky_png_options = :best_compression
-```
 
 ###Spriting helper usage
 Copy **_spriting.scss** to your project directory and **@import** it to your main **.scss** file.
@@ -86,4 +72,25 @@ By default centering is set to false if you need to center your image to x, y or
 $center: false //bool
 $center-y: false //bool
 $center-x: false //bool
+```
+
+By default comma separated option is set to global state,if global is true it means local is true.
+Set to false localy when you construct your sprites, if you need to add sprite into **@media** rule.
+
+```scss
+$comma-separated: $comma-separated //bool
+```
+
+###Compilation
+While using this helper to generate sprite images, configuration options should be applied to your **config.rb** file (adjust path's to match your project).
+
+```ruby
+dir = File.dirname(__FILE__)
+css_dir = "/Content/Styles"
+sass_dir = "scss"
+images_dir = "/Content/Styles/images"
+sprite_load_path = "scss/images"
+relative_assets = true
+sprite_engine = :chunky_png
+chunky_png_options = :best_compression
 ```

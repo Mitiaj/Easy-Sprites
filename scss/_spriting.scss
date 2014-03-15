@@ -1,4 +1,4 @@
-//Created by Paul G. Easy Sprites v0.4.beta.1
+//Created by Paul G. Easy Sprites v0.4.2
 //https://github.com/paulgabronis/Easy-Sprites
 $icons-map: 'icons' !default;
 $retina-sprite: false !default;
@@ -20,6 +20,10 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
       }
     }
   }
+}
+
+.a {
+  color: red;
 }
 
 @function background($map, $name: false, $hover-name: false) {
@@ -90,7 +94,7 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   }
 }
 
-@mixin sprites($class, $name, $hover: false, $pseudo: true, $size: true, $center: false, $center-y: false, $center-x: false) {
+@mixin sprites($class, $name, $hover: false, $pseudo: true, $size: true, $center: false, $center-y: false, $center-x: false, $comma-separated: $comma-separated) {
   $half: 50%;
   $hover-name: $name + -hover;
   $image-width: image-width(sprite-file($map, $name));
@@ -241,9 +245,3 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
     }
   }
 }
-
-@debug "icons map folder name: => #{$icons-map}";
-@debug "retina sprite map enabled: => #{$retina-sprite}";
-@debug "comma separated enabled: => #{$comma-separated}";
-@debug "generated sprite map => #{$map}";
-@debug "generated sprite map for retina => #{$map-retina}";

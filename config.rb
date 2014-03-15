@@ -9,7 +9,8 @@ relative_assets = true
 sprite_engine = :chunky_png
 chunky_png_options = :best_compression
 
-output_style = :expanded
+output_style = (environment == :production) ? :compressed : :expanded
+
 line_comments = false
 
 on_sprite_generated do |sprite_data|
