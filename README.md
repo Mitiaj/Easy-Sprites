@@ -3,6 +3,8 @@ Easy Sprites v0.4.2
 For production please use latest [stable Version][1].
 [1]: https://github.com/paulgabronis/Easy-Sprites/releases
 
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
 ####Dependencies
 _please note this helper will not work with lower versions of sass and compass framework_
 
@@ -75,13 +77,13 @@ $center-x: false //bool
 ```
 
 By default comma separated option is set to global state,if global is true it means local is true.
-Set to false localy when you construct your sprites, if you need to add sprite into **@media** rule.
+If you need to add sprite into **@media** rule set to false localy when construct your sprites.
 
 ```scss
 $comma-separated: $comma-separated //bool
 ```
 
-###Compilation
+###Compass config.rb
 While using this helper to generate sprite images, configuration options should be applied to your **config.rb** file (adjust path's to match your project).
 
 ```ruby

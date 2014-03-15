@@ -16,9 +16,11 @@ module.exports = function (grunt) {
             dev: {
                 options: {
                     cssDir: 'Content/styles/test',
+                    imagesDir: 'scss/images',
                     outputStyle: 'expanded',
                     environment: 'development',
-                    watch: true
+                    watch: true,
+                    trace: true
                 }
             }
         }, watch: {

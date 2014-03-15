@@ -22,10 +22,6 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   }
 }
 
-.a {
-  color: red;
-}
-
 @function background($map, $name: false, $hover-name: false) {
   @if $name {
     @return (sprite-position($map, $name));
