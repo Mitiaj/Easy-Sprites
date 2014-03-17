@@ -6,36 +6,19 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     sassDir: 'scss',
+                    raw: 'sprite_load_path = "scss/images"',
                     cssDir: 'Content/styles',
+                    imagesDir: 'Content/styles/images',
                     outputStyle: 'compressed',
                     environment: 'production',
-                    imagesDir: 'Content/styles/images',
-                    relativeAssets: true
-                }
-            },
-            dev: {
-                options: {
-                    cssDir: 'Content/styles/test',
-                    imagesDir: 'scss/images',
-                    outputStyle: 'expanded',
-                    environment: 'development',
-                    watch: true,
-                    trace: true
-                }
-            }
-        }, watch: {
-            css: {
-                files: '**/*.scss',
-                tasks: ['compass'],
-                options: {
-                    livereload: true
+                    relativeAssets: true,
+                    watch: true
                 }
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.registerTask('start', [
         'compass'
     ]);
