@@ -9,8 +9,8 @@ module.exports = function (grunt) {
                     raw: 'sprite_load_path = "scss/images"',
                     cssDir: 'Content/styles',
                     imagesDir: 'Content/styles/images',
-                    outputStyle: 'compressed',
-                    environment: 'production',
+                    outputStyle: 'expanded',
+                    environment: 'development',
                     relativeAssets: true,
                     watch: true
                 }
