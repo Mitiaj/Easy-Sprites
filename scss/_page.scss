@@ -44,10 +44,20 @@ $social-icons: 'skype', 'gplus';
   left: 35px;
 }
 
-@include sprites($class: '.test-class', $name: 'skype', $center: true);
-@include sprites($class: '.test-hover', $name: 'imgclock', $pseudo: false, $hover: true);
+.test-class {
+  @include sprites($class: '&', $name: 'skype', $pseudo: false, $center: true);
+  &.active {
+    @include sprites-states($name: 'gplus', $pseudo: false);
+  }
+}
 
-$i: 15;
+$i: 5;
 @for $i from 1 through $i {
   @include sprites($class: '.cycle-#{$i}', $name: '#{$i}', $pseudo: false, $comma-separated: false);
+}
+
+@include sprites($class: '.test-hover', $name: 'imgclock', $hover: true, $comma-separated: false);
+
+@media (max-width: 768px) {
+  @include sprites($class: '.media-sprite', $name: 'imgclock', $hover: true, $comma-separated: false);
 }

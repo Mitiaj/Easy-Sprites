@@ -1,4 +1,4 @@
-Easy Sprites v0.4.2
+Easy Sprites v0.4.3
 =====================
 For production please use latest [stable Version][1].
 [1]: https://github.com/paulgabronis/Easy-Sprites/releases
@@ -10,7 +10,7 @@ _please note this helper will not work with lower versions of sass and compass f
 
 |Name    |Version         |
 |:-------|---------------:|
-|SASS    |`3.3.0`         |
+|SASS    |`3.3.4`         |
 |COMPASS |`1.0.0.alpha19` |
 
 ###Spriting helper usage
@@ -77,7 +77,7 @@ $center-x: false //bool
 ```
 
 By default comma separated option is set to global state,if global is true it means local is true.
-If you need to add sprite into **@media** rule set to false localy when construct your sprites.
+If you need to use sprite into **@media** set $comma-separated to false localy when construct your sprites.
 
 ```scss
 $comma-separated: $comma-separated //bool
