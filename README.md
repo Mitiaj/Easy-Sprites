@@ -95,6 +95,3 @@ sprite_load_path = "scss/images"
 relative_assets = true
 chunky_png_options = :best_compression
 ```
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/paulgabronis/easy-sprites/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
