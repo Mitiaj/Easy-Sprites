@@ -1,4 +1,4 @@
-Easy Sprites v0.4.3
+Easy Sprites v0.4.4
 =====================
 For production please use latest [stable Version][1].
 [1]: https://github.com/paulgabronis/Easy-Sprites/releases
@@ -93,6 +93,5 @@ sass_dir = "scss"
 images_dir = "/Content/Styles/images"
 sprite_load_path = "scss/images"
 relative_assets = true
-sprite_engine = :chunky_png
 chunky_png_options = :best_compression
 ```

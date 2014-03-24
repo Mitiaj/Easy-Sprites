@@ -51,11 +51,6 @@ $social-icons: 'skype', 'gplus';
   }
 }
 
-$i: 5;
-@for $i from 1 through $i {
-  @include sprites($class: '.cycle-#{$i}', $name: '#{$i}', $pseudo: false, $comma-separated: false);
-}
-
 @include sprites($class: '.test-hover', $name: 'imgclock', $hover: true, $comma-separated: false);
 
 @media (max-width: 768px) {

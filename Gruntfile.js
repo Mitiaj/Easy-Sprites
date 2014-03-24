@@ -11,6 +11,7 @@ module.exports = function (grunt) {
                     imagesDir: 'Content/styles/images',
                     outputStyle: 'expanded',
                     environment: 'development',
+                    noLineComments: false,
                     relativeAssets: true,
                     watch: true
                 }

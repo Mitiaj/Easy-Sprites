@@ -1,6 +1,6 @@
 {
   "name": "EasySprites",
-  "version": "0.4.2",
+  "version": "0.4.4",
   "description": "Easy spriting plugin for compass",
   "main": "Gruntfile.js",
   "dependencies": {
