@@ -27,7 +27,10 @@ module.exports = function (grunt) {
             options: {
                 files: ['package.json', 'README.md'],
                 commit: false,
+                commitFiles: ['-a'],
                 createTag: false,
+                tagName: 'v%VERSION%',
+                tagMessage: 'Release v%VERSION%',
                 push: false
             }
         },
@@ -43,10 +46,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-bump');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.registerTask('start', [
-        'bump:build',
+        'bump:patch',
         'watch'
     ]);
-    grunt.registerTask('Release Version', [
+    grunt.registerTask('Release Minor Version', [
+        'bump:minor'
+    ]);
+    grunt.registerTask('Release Major Version', [
         'bump:major'
     ]);
 };
