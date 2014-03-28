@@ -1,6 +1,6 @@
 {
   "name": "EasySprites",
-  "version": "0.4.4",
+  "version": "0.4.4-1",
   "description": "Easy spriting plugin for compass",
   "main": "Gruntfile.js",
   "dependencies": {
@@ -9,7 +9,9 @@
   },
   "devDependencies": {
     "grunt": "~0.4.4",
-    "grunt-contrib-compass": "~0.7.2"
+    "grunt-contrib-compass": "~0.7.2",
+    "grunt-bump": "0.0.13",
+    "grunt-contrib-watch": "^0.6.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

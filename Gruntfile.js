@@ -9,18 +9,44 @@ module.exports = function (grunt) {
                     raw: 'sprite_load_path = "scss/images"',
                     cssDir: 'Content/styles',
                     imagesDir: 'Content/styles/images',
+                    relativeAssets: true,
+                    outputStyle: 'compressed',
+                    environment: 'production',
+                    noLineComments: true
+                }
+            },
+            dev: {
+                options: {
                     outputStyle: 'expanded',
                     environment: 'development',
-                    noLineComments: false,
-                    relativeAssets: true,
-                    watch: true
+                    noLineComments: false
                 }
+            }
+        },
+        bump: {
+            options: {
+                files: ['package.json', 'README.md'],
+                commit: false,
+                createTag: false,
+                push: false
+            }
+        },
+        watch: {
+            css: {
+                files: '**/*.scss',
+                tasks: ['compass:dev']
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-bump');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.registerTask('start', [
-        'compass'
+        'bump:build',
+        'watch'
+    ]);
+    grunt.registerTask('Release Version', [
+        'bump:major'
     ]);
 };
