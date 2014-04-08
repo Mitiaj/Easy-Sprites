@@ -1,9 +1,5 @@
-Easy Sprites
+Easy Sprites v0.4
 =====================
-##"version": 0.4.0
-
-For production please use latest [stable Version][1].
-[1]: https://github.com/paulgabronis/Easy-Sprites/releases
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
