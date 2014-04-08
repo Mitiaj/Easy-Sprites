@@ -1,6 +1,6 @@
 Easy Sprites
 =====================
-##"version": 0.4.0
+##"version": 0.4.1
 
 For production please use latest [stable Version][1].
 [1]: https://github.com/paulgabronis/Easy-Sprites/releases

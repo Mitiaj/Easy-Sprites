@@ -1,5 +1,6 @@
 //Created by Paul G. Easy Sprites
 //https://github.com/paulgabronis/Easy-Sprites
+
 $icons-map: 'icons' !default;
 $retina-sprite: false !default;
 $comma-separated: true !default;
@@ -34,14 +35,12 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
 @function background-retina($map-retina, $name: false, $hover-name: false, $size-retina: false) {
   @if $name {
     @return (
-    round(nth(sprite-position($map-retina, $name), 1) / 2)
-    round(nth(sprite-position($map-retina, $name), 2) / 2)
+            round(nth(sprite-position($map-retina, $name), 1) / 2) round(nth(sprite-position($map-retina, $name), 2) / 2)
     );
   }
   @if $hover-name {
     @return (
-    round(nth(sprite-position($map-retina, $hover-name), 1) / 2)
-    round(nth(sprite-position($map-retina, $hover-name), 2) / 2)
+            round(nth(sprite-position($map-retina, $hover-name), 1) / 2) round(nth(sprite-position($map-retina, $hover-name), 2) / 2)
     );
   }
   @if $size-retina {
@@ -90,64 +89,34 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   }
 }
 
-@mixin sprites($class, $name, $hover: false, $pseudo: true, $size: true, $center: false, $center-y: false, $center-x: false, $comma-separated: $comma-separated) {
+@mixin sprites($name, $class: true, $hover: false, $size: true, $center: false, $center-y: false, $center-x: false, $comma-separated: $comma-separated) {
   $half: 50%;
   $hover-name: $name + -hover;
   $image-width: image-width(sprite-file($map, $name));
   $image-height: image-height(sprite-file($map, $name));
 
-  @if $pseudo {
-    #{$class} {
-      &:before {
-        content: "";
-        @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
-        @if $comma-separated {
-          background-position: background($map, $name);
+  @if #{$class} {
+    @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
+    @if $comma-separated {
+      background-position: background($map, $name);
 
-          @at-root #{$class}:before {
-            @extend %comma-separated;
-          }
-
-        } @else {
-          background: $map no-repeat background($map, $name);
-        }
-
-        @if $size {
-          width: $image-width;
-          height: $image-height;
-        }
-        @content;
+      @at-root #{$class}:before {
+        @extend %comma-separated;
       }
-      @if $hover {
-        &:hover {
-          &:before {
-            background-position: background($map, $hover-name);
-          }
-        }
-      }
+
+    } @else {
+      background: $map no-repeat background($map, $name);
     }
-  } @else {
-    #{$class} {
-      @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
-      @if $comma-separated {
-        background-position: background($map, $name);
 
-        @at-root #{$class} {
-          @extend %comma-separated;
-        }
+    @if $size {
+      width: $image-width;
+      height: $image-height;
+    }
+    @content;
 
-      } @else {
-        background: $map no-repeat background($map, $name);
-      }
-
-      @if $size {
-        width: $image-width;
-        height: $image-height;
-      }
-
-      @content;
-      @if $hover {
-        &:hover {
+    @if $hover {
+      &:hover {
+        &:before {
           background-position: background($map, $hover-name);
         }
       }
@@ -158,86 +127,44 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
     $retina-image-width: (image-width(sprite-file($map-retina, $name)) / 2);
     $retina-image-height: (image-height(sprite-file($map-retina, $name)) / 2);
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
-      @if $pseudo {
-        #{$class} {
-          &:before {
-            @include center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
-            @if $comma-separated {
-              background-position: background-retina($map-retina, $name);
 
-              @at-root #{$class}:before {
-                @extend %comma-separated-retina;
-              }
+      #{$class} {
+        @include center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
+        @if $comma-separated {
+          background-position: background-retina($map-retina, $name);
 
-            } @else {
-              background: $map-retina no-repeat background-retina($map-retina, $name);
-            }
-            background-size: background-retina($map-retina, $size-retina: true);
-
-            @if $size {
-              width: $retina-image-width;
-              height: $retina-image-height;
-            }
-
-            @if $hover {
-              &:hover {
-                &:before {
-                  background-position: background-retina($map-retina, $hover-name);
-                }
-              }
-            }
+          @at-root #{$class}:before {
+            @extend %comma-separated-retina;
           }
+
+        } @else {
+          background: $map-retina no-repeat background-retina($map-retina, $name);
+        }
+        background-size: background-retina($map-retina, $size-retina: true);
+
+        @if $size {
+          width: $retina-image-width;
+          height: $retina-image-height;
         }
 
-      } @else {
-        #{$class} {
-          @include center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
-
-          @if $comma-separated {
-            background-position: background-retina($map-retina, $name);
-
-            @at-root #{$class} {
-              @extend %comma-separated-retina;
-            }
-
-          } @else {
-            background: $map-retina no-repeat background-retina($map-retina, $name);
-          }
-          background-size: background-retina($map-retina, $size-retina: true);
-
-          @if $size {
-            width: $retina-image-width;
-            height: $retina-image-height;
-          }
-
-          @if $hover {
-            &:hover {
+        @if $hover {
+          &:hover {
+            &:before {
               background-position: background-retina($map-retina, $hover-name);
             }
           }
         }
       }
+
     }
   }
 }
 
-@mixin sprites-states($name, $pseudo: true) {
-  @if $pseudo {
-    &:before {
-      background-position: background($map, $name);
-    }
-  } @else {
-    background-position: background($map, $name);
-  }
+@mixin sprites-states($name) {
+  background-position: background($map, $name);
   @if $retina-sprite {
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
-      @if $pseudo {
-        &:before {
-          background-position: background-retina($map-retina, $name);
-        }
-      } @else {
-        background-position: background-retina($map-retina, $name);
-      }
+      background-position: background-retina($map-retina, $name);
     }
   }
 }
