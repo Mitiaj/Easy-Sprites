@@ -1,29 +1,44 @@
-$retina-sprite: true;
+$retina-sprite: false;
 //$comma-separated: false;
-$pseudo: true;
 @import "spriting";
 
 $social-icons: 'skype', 'gplus';
-@each $item in $social-icons {
-  @include sprites($class: '.social-#{$item}', $name: $item, $pseudo: false) {
-    display: block;
-    background-color: #f7f7f7;
-    margin: 10px;
-  }
+//@each $item in $social-icons {
+//  .social-#{$item} {
+//    @include sprites($name: $item, $pseudo: false) {
+//      display: block;
+//      background-color: #f7f7f7;
+//      margin: 10px;
+//    }
+//  }
+//}
+
+.test {
+  @include sprites($name: 'imgclock');
 }
 
 .test-pseudo {
-  position: relative;
-  padding: {
-    left: 40px;
-  }
-  @include sprites($class: '&', $name: 'skype', $center-y: true) {
-    display: block;
-    left: 0;
+  &:after {
+    @include sprites($name: 'imgclock');
   }
 }
 
-@include sprites($class: '.test-hover', $name: 'imgclock', $pseudo: false, $hover: true);
+.test-pseudo-over {
+  &:after {
+    @include sprites($name: 'imgclock', $hover: true);
+  }
+}
+
+//.test-pseudo {
+//  position: relative;
+//  padding: {
+//    left: 40px;
+//  }
+//  @include sprites($class: '&', $name: 'skype', $center-y: true) {
+//    display: block;
+//    left: 0;
+//  }
+//}
 
 //.test-pseudo-hover {
 //  position: relative;
@@ -45,13 +60,15 @@ $social-icons: 'skype', 'gplus';
 //@include sprites($class: '.other-test-y', $name: 'gplus', $pseudo: false, $center-y: true) {
 //  left: 35px;
 //}
-//
-.test-class {
-  @include sprites($name: 'skype', $class: '&', $pseudo: false, $center: true);
-  &.active {
-    @include sprites-states($name: 'imgclock');
-  }
-}
+
+//.test-class {
+//  &:after {
+//    @include sprites($name: 'skype', $center: true);
+//  }
+//  &.active {
+//    @include sprites-states($name: 'imgclock');
+//  }
+//}
 
 //
 //@include sprites($class: '.test-hover', $name: 'imgclock', $hover: true, $comma-separated: false);

@@ -1,6 +1,6 @@
 Easy Sprites
 =====================
-##"version": 0.4.2
+##"version": 0.4.3
 
 For production please use latest [stable Version][1].
 [1]: https://github.com/paulgabronis/Easy-Sprites/releases
@@ -36,8 +36,7 @@ $comma-separated: true //by default is set to true if you don't want comma-separ
 
 ###Local options which can be used while generating sprite images.
 ```scss
-@include sprites($class: '&', $name:'icon-name') //if adding inside class as a module with $pseudo:true
-@include sprites($class: '.class-name', $name:'icon-name', $pseudo: false) //if adding as standalone class or selector within a module
+@include sprites($name:'icon-name') //if adding inside class as a module with $pseudo:true
 @include sprites-states($name:'active-icon') //add this mixin into sprite class if you need any additional states for your icons i.e. active, opened etc...
 ```
 _if additional states needs to be added, your code should look like this:_
@@ -47,8 +46,6 @@ _if additional states needs to be added, your code should look like this:_
     @include sprites-states($name:'active-icon')
   }
 }
-//it also contains local variable:
-$pseudo: true //set to false if your parent class is not a pseudo class.
 ```
 
 ###List of local options
@@ -56,12 +53,6 @@ You can enable hover state, just add image to icons folder and attach **-hover**
 
 ```scss
 $hover: false //bool
-```
-
-By default sprite images is enabled to use with pseudo classes/elements
-
-```scss
-$pseudo: true //bool
 ```
 
 By default element size is set to true it applies width and height from actual source image, if you don't need them for any reason you can set it to false.
