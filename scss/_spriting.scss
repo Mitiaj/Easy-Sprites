@@ -1,6 +1,7 @@
 //Created by Paul G. Easy Sprites
 //https://github.com/paulgabronis/Easy-Sprites
-
+//
+//global variables
 $icons-map: 'icons' !default;
 $retina-sprite: false !default;
 $comma-separated: true !default;
@@ -51,24 +52,25 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   }
 }
 
-@mixin center($center, $half, $image-height, $image-width, $center-y, $center-x) {
+@mixin center($center, $image-height, $image-width, $center-y, $center-x) {
+  $half-sprite: 50%;
   @if $center {
     position: absolute;
-    top: $half;
-    left: $half;
+    top: $half-sprite;
+    left: $half-sprite;
     margin: {
       top: -($image-height / 2);
       left: -($image-width / 2);
     }
   } @else if $center-y {
     position: absolute;
-    top: $half;
+    top: $half-sprite;
     margin: {
       top: -($image-height / 2);
     }
   } @else if $center-x {
     position: absolute;
-    left: $half;
+    left: $half-sprite;
     margin: {
       left: -($image-width / 2);
     }
@@ -93,7 +95,7 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
 }
 
 //TODO do better structure while constructing classes
-@mixin class-test($name, $size, $image-width, $image-height) {
+@mixin sprite-core($name, $size, $image-width, $image-height) {
   @if $comma-separated {
     background-position: background($map, $name);
 
@@ -111,8 +113,27 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   }
 }
 
-@mixin sprites($name, $class, $pseudo: $pseudo, $hover: false, $size: true, $center: false, $center-y: false, $center-x: false, $comma-separated: $comma-separated) {
-  $half: 50%;
+@mixin sprite-core-retina($name, $size, $retina-image-width, $retina-image-height) {
+  @if $comma-separated {
+    background-position: background-retina($map-retina, $name);
+
+    @at-root #{'&'} {
+      @extend %comma-separated-retina;
+    }
+
+  } @else {
+    background: $map-retina no-repeat background-retina($map-retina, $name);
+  }
+  background-size: background-retina($map-retina, $size-retina: true);
+
+  @if $size {
+    width: $retina-image-width;
+    height: $retina-image-height;
+  }
+}
+
+@mixin sprites($name, $class, $hover: false, $size: true, $center: false, $center-y: false, $center-x: false, $pseudo: $pseudo, $comma-separated: $comma-separated) {
+
   $hover-name: $name + -hover;
   $image-width: image-width(sprite-file($map, $name));
   $image-height: image-height(sprite-file($map, $name));
@@ -121,13 +142,11 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
     #{$class} {
       &:before {
         content: "";
-        @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
-
-        //fixme test
-        @include class-test($name, $size, $image-width, $image-height);
-
+        @include center($center, $image-height, $image-width, $center-y, $center-x);
+        @include sprite-core($name, $size, $image-width, $image-height);
         @content;
       }
+
       @if $hover {
         &:hover {
           &:before {
@@ -138,11 +157,8 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
     }
   } @else {
     #{$class} {
-      @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
-
-      //fixme test
-      @include class-test($name, $size, $image-width, $image-height);
-
+      @include center($center, $image-height, $image-width, $center-y, $center-x);
+      @include sprite-core($name, $size, $image-width, $image-height);
       @content;
 
       @if $hover {
@@ -156,27 +172,13 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   @if $retina-sprite {
     $retina-image-width: (image-width(sprite-file($map-retina, $name)) / 2);
     $retina-image-height: (image-height(sprite-file($map-retina, $name)) / 2);
+
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
       @if $pseudo {
         #{$class} {
           &:before {
             @include center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
-            @if $comma-separated {
-              background-position: background-retina($map-retina, $name);
-
-              @at-root #{$class}:before {
-                @extend %comma-separated-retina;
-              }
-
-            } @else {
-              background: $map-retina no-repeat background-retina($map-retina, $name);
-            }
-            background-size: background-retina($map-retina, $size-retina: true);
-
-            @if $size {
-              width: $retina-image-width;
-              height: $retina-image-height;
-            }
+            @include sprite-core-retina($name, $size, $retina-image-width, $retina-image-height);
 
             @if $hover {
               &:hover {
@@ -191,23 +193,7 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
       } @else {
         #{$class} {
           @include center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
-
-          @if $comma-separated {
-            background-position: background-retina($map-retina, $name);
-
-            @at-root #{$class} {
-              @extend %comma-separated-retina;
-            }
-
-          } @else {
-            background: $map-retina no-repeat background-retina($map-retina, $name);
-          }
-          background-size: background-retina($map-retina, $size-retina: true);
-
-          @if $size {
-            width: $retina-image-width;
-            height: $retina-image-height;
-          }
+          @include sprite-core-retina($name, $size, $retina-image-width, $retina-image-height);
 
           @if $hover {
             &:hover {
@@ -216,6 +202,7 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
           }
         }
       }
+
     }
   }
 }
