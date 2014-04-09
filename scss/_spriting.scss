@@ -5,6 +5,9 @@ $icons-map: 'icons' !default;
 $retina-sprite: false !default;
 $comma-separated: true !default;
 
+//TODO test before use
+$pseudo: false !default;
+
 $map: sprite-map("#{$icons-map}/*.png", $layout: smart);
 $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $layout: smart), false);
 
@@ -89,34 +92,61 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   }
 }
 
-@mixin sprites($name, $class: true, $hover: false, $size: true, $center: false, $center-y: false, $center-x: false, $comma-separated: $comma-separated) {
+//TODO do better structure while constructing classes
+@mixin class-test($name, $size, $image-width, $image-height) {
+  @if $comma-separated {
+    background-position: background($map, $name);
+
+    @at-root #{'&'} {
+      @extend %comma-separated;
+    }
+
+  } @else {
+    background: $map no-repeat background($map, $name);
+  }
+
+  @if $size {
+    width: $image-width;
+    height: $image-height;
+  }
+}
+
+@mixin sprites($name, $class, $pseudo: $pseudo, $hover: false, $size: true, $center: false, $center-y: false, $center-x: false, $comma-separated: $comma-separated) {
   $half: 50%;
   $hover-name: $name + -hover;
   $image-width: image-width(sprite-file($map, $name));
   $image-height: image-height(sprite-file($map, $name));
 
-  @if #{$class} {
-    @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
-    @if $comma-separated {
-      background-position: background($map, $name);
+  @if $pseudo {
+    #{$class} {
+      &:before {
+        content: "";
+        @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
 
-      @at-root #{$class}:before {
-        @extend %comma-separated;
+        //fixme test
+        @include class-test($name, $size, $image-width, $image-height);
+
+        @content;
       }
-
-    } @else {
-      background: $map no-repeat background($map, $name);
+      @if $hover {
+        &:hover {
+          &:before {
+            background-position: background($map, $hover-name);
+          }
+        }
+      }
     }
+  } @else {
+    #{$class} {
+      @include center($center, $half, $image-height, $image-width, $center-y, $center-x);
 
-    @if $size {
-      width: $image-width;
-      height: $image-height;
-    }
-    @content;
+      //fixme test
+      @include class-test($name, $size, $image-width, $image-height);
 
-    @if $hover {
-      &:hover {
-        &:before {
+      @content;
+
+      @if $hover {
+        &:hover {
           background-position: background($map, $hover-name);
         }
       }
@@ -127,35 +157,65 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
     $retina-image-width: (image-width(sprite-file($map-retina, $name)) / 2);
     $retina-image-height: (image-height(sprite-file($map-retina, $name)) / 2);
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
+      @if $pseudo {
+        #{$class} {
+          &:before {
+            @include center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
+            @if $comma-separated {
+              background-position: background-retina($map-retina, $name);
 
-      #{$class} {
-        @include center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
-        @if $comma-separated {
-          background-position: background-retina($map-retina, $name);
+              @at-root #{$class}:before {
+                @extend %comma-separated-retina;
+              }
 
-          @at-root #{$class}:before {
-            @extend %comma-separated-retina;
+            } @else {
+              background: $map-retina no-repeat background-retina($map-retina, $name);
+            }
+            background-size: background-retina($map-retina, $size-retina: true);
+
+            @if $size {
+              width: $retina-image-width;
+              height: $retina-image-height;
+            }
+
+            @if $hover {
+              &:hover {
+                &:before {
+                  background-position: background-retina($map-retina, $hover-name);
+                }
+              }
+            }
+          }
+        }
+
+      } @else {
+        #{$class} {
+          @include center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
+
+          @if $comma-separated {
+            background-position: background-retina($map-retina, $name);
+
+            @at-root #{$class} {
+              @extend %comma-separated-retina;
+            }
+
+          } @else {
+            background: $map-retina no-repeat background-retina($map-retina, $name);
+          }
+          background-size: background-retina($map-retina, $size-retina: true);
+
+          @if $size {
+            width: $retina-image-width;
+            height: $retina-image-height;
           }
 
-        } @else {
-          background: $map-retina no-repeat background-retina($map-retina, $name);
-        }
-        background-size: background-retina($map-retina, $size-retina: true);
-
-        @if $size {
-          width: $retina-image-width;
-          height: $retina-image-height;
-        }
-
-        @if $hover {
-          &:hover {
-            &:before {
+          @if $hover {
+            &:hover {
               background-position: background-retina($map-retina, $hover-name);
             }
           }
         }
       }
-
     }
   }
 }
