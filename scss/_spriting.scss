@@ -1,7 +1,6 @@
 //Created by Paul G. Easy Sprites
 //https://github.com/paulgabronis/Easy-Sprites
-//
-//global variables
+
 $icons-map: 'icons' !default;
 $retina-sprite: false !default;
 $comma-separated: true !default;
@@ -49,57 +48,16 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   }
 }
 
-@mixin center($center, $image-height, $image-width, $center-y, $center-x) {
+@mixin sprite-core($name, $size, $center, $center-y, $center-x) {
   $half-sprite: 50%;
-  @if $center {
-    position: absolute;
-    top: $half-sprite;
-    left: $half-sprite;
-    margin: {
-      top: -($image-height / 2);
-      left: -($image-width / 2);
-    }
-  } @else if $center-y {
-    position: absolute;
-    top: $half-sprite;
-    margin: {
-      top: -($image-height / 2);
-    }
-  } @else if $center-x {
-    position: absolute;
-    left: $half-sprite;
-    margin: {
-      left: -($image-width / 2);
-    }
-  }
-}
+  $image-width: image-width(sprite-file($map, $name));
+  $image-height: image-height(sprite-file($map, $name));
 
-@mixin center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x) {
-  @if $center {
-    margin: {
-      top: -($retina-image-height / 2);
-      left: -($retina-image-width / 2);
-    }
-  } @else if $center-y {
-    margin: {
-      top: -($retina-image-height / 2);
-    }
-  } @else if $center-x {
-    margin: {
-      left: -($retina-image-width / 2);
-    }
-  }
-}
-
-//TODO do better structure while constructing classes
-@mixin sprite-core($name, $size, $image-width, $image-height) {
   @if $comma-separated {
     background-position: background($map, $name);
-
     @at-root #{'&'} {
       @extend %comma-separated;
     }
-
   } @else {
     background: $map no-repeat background($map, $name);
   }
@@ -109,16 +67,38 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
     height: $image-height;
   }
 
+  @if $center {
+    position: absolute;
+    top: $half-sprite;
+    left: $half-sprite;
+    margin: {
+      top: -($image-height / 2);
+      left: -($image-width / 2);
+    }
+  } @else if $center-y {
+    position: absolute;
+    top: $half-sprite;
+    margin: {
+      top: -($image-height / 2);
+    }
+  } @else if $center-x {
+    position: absolute;
+    left: $half-sprite;
+    margin: {
+      left: -($image-width / 2);
+    }
+  }
 }
 
-@mixin sprite-core-retina($name, $size, $retina-image-width, $retina-image-height) {
+@mixin sprite-core-retina($name, $size, $center, $center-y, $center-x) {
+  $retina-image-width: (image-width(sprite-file($map-retina, $name)) / 2);
+  $retina-image-height: (image-height(sprite-file($map-retina, $name)) / 2);
+
   @if $comma-separated {
     background-position: background-retina($map-retina, $name);
-
     @at-root #{'&'} {
       @extend %comma-separated-retina;
     }
-
   } @else {
     background: $map-retina no-repeat background-retina($map-retina, $name);
   }
@@ -128,18 +108,27 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
     width: $retina-image-width;
     height: $retina-image-height;
   }
+
+  @if $center {
+    margin: {
+      top: -($retina-image-height / 2);
+      left: -($retina-image-width / 2);
+    }
+  } @else if $center-y {
+    margin: {
+      top: -($retina-image-height / 2);
+    }
+  } @else if $center-x {
+    margin: {
+      left: -($retina-image-width / 2);
+    }
+  }
 }
 
 @mixin sprites($name, $hover: false, $size: true, $center: false, $center-y: false, $center-x: false, $comma-separated: $comma-separated) {
-
   $hover-name: $name + -hover;
-  $image-width: image-width(sprite-file($map, $name));
-  $image-height: image-height(sprite-file($map, $name));
-
-  @include center($center, $image-height, $image-width, $center-y, $center-x);
-  @include sprite-core($name, $size, $image-width, $image-height);
+  @include sprite-core($name, $size, $center, $center-y, $center-x);
   @content;
-
   @if $hover {
     &:hover {
       background-position: background($map, $hover-name);
@@ -147,13 +136,8 @@ $map-retina: if($retina-sprite == true, sprite-map("#{$icons-map}@x2/*.png", $la
   }
 
   @if $retina-sprite {
-    $retina-image-width: (image-width(sprite-file($map-retina, $name)) / 2);
-    $retina-image-height: (image-height(sprite-file($map-retina, $name)) / 2);
-
     @media only screen and (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2.0) {
-      @include center-retina($center, $retina-image-height, $retina-image-width, $center-y, $center-x);
-      @include sprite-core-retina($name, $size, $retina-image-width, $retina-image-height);
-
+      @include sprite-core-retina($name, $size, $center, $center-y, $center-x);
       @if $hover {
         &:hover {
           background-position: background-retina($map-retina, $hover-name);
