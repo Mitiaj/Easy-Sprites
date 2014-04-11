@@ -1,5 +1,6 @@
 Easy Sprites v0.4
 =====================
+http://www.easysprites.net
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
